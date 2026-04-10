@@ -18,6 +18,7 @@ import { mistakes } from '../data/mistakes.js';
 import { glossary } from '../data/glossary.js';
 import { resources } from '../data/resources.js';
 import { implementation } from '../data/implementation.js';
+import { languages } from '../data/languages.js';
 
 class App {
   constructor() {
@@ -43,7 +44,8 @@ class App {
       'mistakes': mistakes,
       'glossary': glossary,
       'resources': resources,
-      'implementation': implementation
+      'implementation': implementation,
+      'languages': languages
     };
 
     // Expose to global for onclick handlers

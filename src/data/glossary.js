@@ -34,12 +34,17 @@ export const glossary = {
     {term:'Entrypoint',definition:'The executable that runs when a container starts; unlike CMD, it is not easily overridden at runtime.'},
     {term:'CMD',definition:'The default command or arguments passed to the entrypoint when a container starts; easily overridden at runtime.'},
     {term:'EXPOSE',definition:'A Dockerfile instruction that documents which ports the container listens on; does NOT actually publish the port.'},
-    {term:'Tag',definition:'A label applied to an image to identify a specific version or variant (e.g., nginx:1.25-alpine).'},
+    {term:'Tag',definition:'A label applied to an image to identify a specific version or variant (e.g., nginx:1.28-alpine).'},
     {term:'Distroless',definition:'Minimal Docker images from Google that contain only the application and its runtime dependencies — no shell, no package manager.'},
     {term:'Alpine',definition:'A lightweight Linux distribution (~5MB) commonly used as a Docker base image for smaller container sizes.'},
     {term:'Swarm',definition:'Docker\'s built-in container orchestration tool for managing multi-node clusters (largely superseded by Kubernetes).'},
     {term:'Service',definition:'In Docker Compose, a service defines a container configuration — its image, ports, volumes, environment, and dependencies.'},
     {term:'tmpfs',definition:'A temporary filesystem stored in memory only — data is never written to disk and is lost when the container stops.'},
-    {term:'PID 1',definition:'The first process in a container. It must handle signals properly (SIGTERM) for graceful shutdown — use tini or dumb-init.'}
+    {term:'PID 1',definition:'The first process in a container. It must handle signals properly (SIGTERM) for graceful shutdown — use tini or dumb-init.'},
+    {term:'Nginx',definition:'A high-performance web server and reverse proxy widely used in Docker as a load balancer and static file server. Image: nginx:alpine.'},
+    {term:'Caddy',definition:'A modern web server with automatic HTTPS via Let\'s Encrypt. Simpler configuration than Nginx. Image: caddy:2-alpine.'},
+    {term:'Caddyfile',definition:'The configuration file for Caddy web server — uses a minimal, human-readable syntax compared to nginx.conf.'},
+    {term:'WSL',definition:'Windows Subsystem for Linux — allows running Linux distributions on Windows. Docker Desktop uses WSL 2 as its backend on Windows.'},
+    {term:'Podman',definition:'A daemonless, rootless container engine by Red Hat that is CLI-compatible with Docker. Best for security-focused environments.'}
   ]
 };

@@ -35,7 +35,7 @@ export const quickNotes = {
         'Composed of layers — each instruction creates a layer',
         'Layers are cached for faster rebuilds',
         'Stored in registries (Docker Hub, ECR, GCR)',
-        'Tag format: <code>name:tag</code> (e.g., <code>node:20-alpine</code>)',
+        'Tag format: <code>name:tag</code> (e.g., <code>node:24-alpine</code>)',
         'Use <code>.dockerignore</code> to exclude files from build context',
         'Multi-stage builds reduce final image size dramatically'
       ]

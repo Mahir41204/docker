@@ -17,19 +17,19 @@ export const mistakes = {
         <li>Missing .dockerignore file</li>
       </ul>`,
       codeExamples:[
-        {language:'dockerfile',title:'❌ Bad — 900MB+ image',code:`FROM node:20
+        {language:'dockerfile',title:'❌ Bad — 900MB+ image',code:`FROM node:24
 WORKDIR /app
 COPY . .
 RUN npm install
 CMD ["node", "server.js"]`,explanation:'Full Node.js image, copies everything (including node_modules, .git), installs dev deps'},
-        {language:'dockerfile',title:'✅ Good — ~100MB image',code:`FROM node:20-alpine AS builder
+        {language:'dockerfile',title:'✅ Good — ~100MB image',code:`FROM node:24-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:20-alpine
+FROM node:24-alpine
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
@@ -52,12 +52,12 @@ CMD ["node", "dist/server.js"]`,explanation:'Alpine base, multi-stage build, onl
       codeExamples:[
         {language:'yaml',title:'❌ Bad — no volume for database',code:`services:
   db:
-    image: postgres:16
+    image: postgres:18
     environment:
       POSTGRES_PASSWORD: secret`,explanation:'Database data is stored in the container layer — gone when container is removed!'},
         {language:'yaml',title:'✅ Good — named volume',code:`services:
   db:
-    image: postgres:16
+    image: postgres:18
     environment:
       POSTGRES_PASSWORD: secret
     volumes:
@@ -96,12 +96,12 @@ volumes:
       id:'security-mistakes',title:'❌ Mistake: Running as Root',
       content:`<p><strong>Problem:</strong> By default, containers run as root. If an attacker escapes the container, they're root on the host.</p>`,
       codeExamples:[
-        {language:'dockerfile',title:'❌ Bad — running as root',code:`FROM node:20
+        {language:'dockerfile',title:'❌ Bad — running as root',code:`FROM node:24
 WORKDIR /app
 COPY . .
 RUN npm install
 CMD ["node", "server.js"]`,explanation:'This container runs as root by default'},
-        {language:'dockerfile',title:'✅ Good — non-root user',code:`FROM node:20-alpine
+        {language:'dockerfile',title:'✅ Good — non-root user',code:`FROM node:24-alpine
 RUN addgroup -S app && adduser -S app -G app
 WORKDIR /app
 COPY --chown=app:app . .

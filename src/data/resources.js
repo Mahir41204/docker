@@ -16,6 +16,8 @@ export const resources = {
     {title:'Docker Security Cheat Sheet',icon:'🔒',desc:'OWASP Docker Security guide covering runtime security, image security, and orchestrator hardening.',url:'https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html',badge:'advanced'},
     {title:'Play with Docker',icon:'🎮',desc:'Free online Docker playground — run Docker commands in your browser without installing anything.',url:'https://labs.play-with-docker.com/',badge:'beginner'},
     {title:'containerd Documentation',icon:'📦',desc:'Official docs for the industry-standard container runtime used by Docker and Kubernetes.',url:'https://containerd.io/docs/',badge:'advanced'},
-    {title:'Docker Roadmap (roadmap.sh)',icon:'🗺️',desc:'Visual learning roadmap for Docker — from basics to advanced topics in order.',url:'https://roadmap.sh/docker',badge:'beginner'}
+    {title:'Docker Roadmap (roadmap.sh)',icon:'🗺️',desc:'Visual learning roadmap for Docker — from basics to advanced topics in order.',url:'https://roadmap.sh/docker',badge:'beginner'},
+    {title:'Caddy Server Documentation',icon:'🔐',desc:'Official docs for the Caddy web server with automatic HTTPS. Covers Caddyfile syntax, reverse proxy, and Docker usage.',url:'https://caddyserver.com/docs/',badge:'intermediate'},
+    {title:'Nginx Documentation',icon:'🌐',desc:'Official Nginx documentation covering configuration, reverse proxy, load balancing, and performance tuning.',url:'https://nginx.org/en/docs/',badge:'intermediate'}
   ]
 };

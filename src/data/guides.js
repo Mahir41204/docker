@@ -9,8 +9,8 @@ export const guides = {
       id:'install-docker',title:'Guide: Install Docker',
       content:'<p>Get Docker running on your machine:</p>',
       subsections:[
-        {title:'Windows',content:'<ol><li>Download <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank">Docker Desktop for Windows</a></li><li>Run installer — requires WSL 2 backend</li><li>Restart computer</li><li>Open Docker Desktop, accept terms</li><li>Verify: <code>docker --version</code></li></ol>'},
-        {title:'macOS',content:'<ol><li>Download <a href="https://docs.docker.com/desktop/install/mac-install/" target="_blank">Docker Desktop for Mac</a> (Intel or Apple Silicon)</li><li>Drag to Applications folder</li><li>Open Docker Desktop</li><li>Verify: <code>docker --version</code></li></ol>'},
+        {title:'Windows',content:'<h4>Option A: Docker Desktop (Recommended)</h4><ol><li>Download <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank">Docker Desktop for Windows</a></li><li>Run installer — requires WSL 2 backend</li><li>Restart computer</li><li>Open Docker Desktop, accept terms</li></ol><h4>Option B: WSL 2 + Docker Engine (Advanced)</h4>',codeExamples:[{language:'powershell',title:'Windows — Install via WSL 2',code:'# Enable WSL 2\nwsl --install\n\n# After restart, install Ubuntu in WSL\nwsl --install -d Ubuntu\n\n# Then install Docker Desktop from docker.com\n# OR install Docker Engine inside WSL Ubuntu (see Linux steps)\n\n# Verify\ndocker --version\ndocker compose version',explanation:'Docker Desktop is the easiest option. WSL 2 backend gives near-native Linux performance on Windows.'}]},
+        {title:'macOS',content:'<h4>Option A: Homebrew (Recommended)</h4>',codeExamples:[{language:'bash',title:'macOS — Install via Homebrew',code:'# Install Docker Desktop via Homebrew\nbrew install --cask docker\n\n# Launch Docker Desktop\nopen /Applications/Docker.app\n\n# Wait for the Docker icon to stop animating in menu bar\n\n# Verify\ndocker --version\ndocker compose version',explanation:'Homebrew is the fastest way to install on macOS. Works on both Intel and Apple Silicon.'}]},
         {title:'Linux (Ubuntu/Debian)',codeExamples:[{language:'bash',title:'Install on Ubuntu',code:`# Remove old versions
 sudo apt-get remove docker docker-engine docker.io containerd runc
 
@@ -34,14 +34,15 @@ sudo usermod -aG docker $USER
 docker --version
 docker compose version`,explanation:'Log out and back in after adding yourself to the docker group'}]}
       ],
-      keyTakeaways:['Windows/Mac: Use Docker Desktop','Linux: Install Docker Engine via official repository','Always add your user to the docker group on Linux','Verify with docker --version']
+      keyTakeaways:['Windows: Docker Desktop + WSL 2 backend','macOS: brew install --cask docker','Linux (Ubuntu): Install Docker Engine via official apt repository','Always add your user to the docker group on Linux','All platforms: verify with docker --version']
     },
     {
       id:'first-container-guide',title:'Guide: Run Your First Container',
       content:'<p>A hands-on walkthrough of your first Docker experience:</p>',
       steps:[
         {title:'Pull and run hello-world',code:{language:'bash',code:'docker run hello-world',explanation:'Docker pulls the image, creates a container, runs it, and shows output'}},
-        {title:'Run a web server',code:{language:'bash',code:'docker run -d -p 8080:80 --name myweb nginx:alpine',explanation:'Visit http://localhost:8080 to see the Nginx welcome page'}},
+        {title:'Run a web server (Nginx)',code:{language:'bash',code:'docker run -d -p 8080:80 --name myweb nginx:alpine',explanation:'Visit http://localhost:8080 to see the Nginx welcome page'}},
+        {title:'Or try Caddy instead',code:{language:'bash',code:'docker run -d -p 8080:80 --name myweb caddy:2-alpine',explanation:'Caddy is a modern alternative to Nginx with automatic HTTPS. Same ports, different server.'}},
         {title:'Explore the container',code:{language:'bash',code:'# View running containers\ndocker ps\n\n# View logs\ndocker logs myweb\n\n# Shell into the container\ndocker exec -it myweb sh\n\n# Inside: look around\nls /usr/share/nginx/html/\ncat /etc/nginx/nginx.conf\nexit',explanation:'You now have a shell inside a running container!'}},
         {title:'Clean up',code:{language:'bash',code:'docker stop myweb\ndocker rm myweb\ndocker system prune',explanation:'Always clean up after experiments'}}
       ]
@@ -56,7 +57,7 @@ const server = http.createServer((req, res) => {
   res.end(JSON.stringify({ message: 'Hello from Docker!', time: new Date() }));
 });
 server.listen(3000, () => console.log('Server on port 3000'));`,explanation:'A simple HTTP server that returns JSON'}},
-        {title:'Create the Dockerfile',code:{language:'dockerfile',code:`FROM node:20-alpine
+        {title:'Create the Dockerfile',code:{language:'dockerfile',code:`FROM node:24-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
@@ -84,7 +85,7 @@ CMD ["node", "server.js"]`,explanation:'Alpine base, non-root user, dependency c
     restart: unless-stopped
   
   db:
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     environment:
       POSTGRES_USER: app
       POSTGRES_PASSWORD: secret
@@ -96,7 +97,7 @@ CMD ["node", "server.js"]`,explanation:'Alpine base, non-root user, dependency c
       retries: 5
   
   cache:
-    image: redis:7-alpine
+    image: redis:8-alpine
     command: redis-server --maxmemory 128mb
 
 volumes:
@@ -112,7 +113,7 @@ volumes:
       content:'<p>A checklist for production Docker deployments:</p>',
       alerts:[{type:'warning',title:'Production Checklist',text:'Use these practices for any production deployment. Skipping any of these can lead to security vulnerabilities, data loss, or downtime.'}],
       codeExamples:[{language:'dockerfile',title:'Production Dockerfile',code:`# Multi-stage build
-FROM node:20 AS builder
+FROM node:24 AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -120,7 +121,7 @@ COPY . .
 RUN npm run build && npm prune --production
 
 # Production image
-FROM node:20-alpine
+FROM node:24-alpine
 RUN apk add --no-cache tini
 RUN addgroup -S app && adduser -S app -G app
 WORKDIR /app

@@ -52,7 +52,7 @@ docker push myregistry.com/myapp:1.0`,explanation:'The CLI covers the entire lif
       </ul>`,
       codeExamples:[{language:'json',title:'.devcontainer/devcontainer.json',code:`{
   "name": "Node.js Dev Container",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },

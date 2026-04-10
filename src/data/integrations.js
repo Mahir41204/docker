@@ -137,7 +137,7 @@ spec:
       db: { condition: service_healthy }
   
   db:
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     volumes: [db-data:/var/lib/postgresql/data]
     environment:
       POSTGRES_PASSWORD: pass
@@ -148,7 +148,7 @@ spec:
       interval: 5s
   
   cache:
-    image: redis:7-alpine
+    image: redis:8-alpine
 
 volumes:
   db-data:`,explanation:'Complete backend stack with database, cache, and API — all in one compose file'},
@@ -167,9 +167,27 @@ volumes:
     depends_on: [web]
 
 volumes:
-  static:`,explanation:'Nginx serves static files, Gunicorn serves the Django app. Shared volume for static files.'}
+  static:`,explanation:'Nginx serves static files, Gunicorn serves the Django app. Shared volume for static files.'},
+        {language:'yaml',title:'Python Django + Caddy (modern alternative)',code:`services:
+  web:
+    build: .
+    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
+    volumes: [./app:/app, static:/app/static]
+  
+  caddy:
+    image: caddy:2-alpine
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - static:/srv/static:ro
+      - caddy_data:/data
+    depends_on: [web]
+
+volumes:
+  static:
+  caddy_data:`,explanation:'Caddy provides automatic HTTPS and simpler config. Use Caddyfile instead of nginx.conf.'}
       ],
-      keyTakeaways:['Any backend framework works with Docker','Use compose for local development stacks','Keep the same compose structure close to production','Use health checks to ensure proper startup order']
+      keyTakeaways:['Any backend framework works with Docker','Use compose for local development stacks','Nginx and Caddy are both great reverse proxy choices','Caddy has automatic HTTPS — simpler for production','Use health checks to ensure proper startup order']
     }
   ]
 };

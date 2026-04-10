@@ -95,6 +95,90 @@ export const tools = {
       keyTakeaways:['Docker = build + run containers (single host)','Kubernetes = orchestrate containers (multi-host)','K8s handles scaling, healing, discovery, updates','K8s uses containerd (not Docker) as its runtime','Learn Docker first, then Kubernetes']
     },
     {
+      id:'web-servers',title:'Web Servers — Nginx vs Caddy',
+      content:`<p>Two popular web servers you'll use heavily with Docker as reverse proxies and static file servers:</p>
+      <h4>Nginx</h4>
+      <ul>
+        <li><strong>Battle-tested</strong> — powers ~35% of the web</li>
+        <li><strong>High performance</strong> — event-driven, low memory footprint</li>
+        <li><strong>Configuration</strong> — manual config files, steep learning curve</li>
+        <li><strong>HTTPS</strong> — manual certificate management (or use Certbot)</li>
+        <li><strong>Docker image</strong>: <code>nginx:alpine</code></li>
+      </ul>
+      <h4>Caddy</h4>
+      <ul>
+        <li><strong>Modern</strong> — built in Go, designed for simplicity</li>
+        <li><strong>Automatic HTTPS</strong> — provisions and renews TLS certificates automatically via Let's Encrypt</li>
+        <li><strong>Simple config</strong> — Caddyfile syntax is far simpler than nginx.conf</li>
+        <li><strong>HTTP/3 support</strong> — built-in with QUIC</li>
+        <li><strong>Docker image</strong>: <code>caddy:2-alpine</code></li>
+      </ul>`,
+      codeExamples:[
+        {language:'text',title:'Nginx config (nginx.conf)',code:`server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://api:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /static/ {
+        alias /usr/share/nginx/html/static/;
+    }
+}`,explanation:'Nginx requires manual configuration for reverse proxying and HTTPS'},
+        {language:'text',title:'Caddy config (Caddyfile)',code:`example.com {
+    reverse_proxy api:3000
+    file_server /static/* {
+        root /srv
+    }
+}`,explanation:'Caddy achieves the same result in 5 lines and auto-provisions HTTPS'},
+        {language:'yaml',title:'Docker Compose — Nginx reverse proxy',code:`services:
+  webserver:
+    image: nginx:alpine
+    ports: ["80:80"]
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on: [api]
+  
+  api:
+    build: .
+    expose: ["3000"]`,explanation:'Nginx as reverse proxy, API only exposed internally'},
+        {language:'yaml',title:'Docker Compose — Caddy reverse proxy',code:`services:
+  webserver:
+    image: caddy:2-alpine
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on: [api]
+  
+  api:
+    build: .
+    expose: ["3000"]
+
+volumes:
+  caddy_data:`,explanation:'Caddy as reverse proxy with automatic HTTPS. caddy_data volume stores certificates.'}
+      ],
+      comparisonTable:{
+        headers:['Feature','Nginx','Caddy'],
+        rows:[
+          ['Learning Curve','Steep','Easy'],
+          ['HTTPS','Manual (Certbot)','Automatic (built-in)'],
+          ['Config Syntax','Complex','Simple (Caddyfile)'],
+          ['Performance','Excellent','Very Good'],
+          ['HTTP/3','Via module','Built-in'],
+          ['Docker Image Size','~45MB (alpine)','~45MB (alpine)'],
+          ['Community','Massive','Growing fast'],
+          ['Best For','High-traffic production','Quick setup, auto-HTTPS']
+        ]
+      },
+      keyTakeaways:['Nginx: battle-tested, highest performance, manual HTTPS','Caddy: automatic HTTPS, simple config, modern features','Both work great as Docker reverse proxies','Use Caddy for simplicity, Nginx for maximum control','caddy:2-alpine and nginx:alpine are both ~45MB']
+    },
+    {
       id:'vms-vs-containers',title:'Virtual Machines — Detailed Contrast',
       content:`<p>Containers and VMs solve different problems and can be used together:</p>`,
       comparisonTable:{

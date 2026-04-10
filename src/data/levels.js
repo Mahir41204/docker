@@ -49,7 +49,8 @@ export const levels = {
         content:'<p>Let\'s run something more useful — a web server:</p>',
         codeExamples:[
           {language:'bash',title:'Run Nginx web server',code:'docker run -d -p 8080:80 --name my-nginx nginx:alpine',explanation:'-d = detached (background), -p 8080:80 = map port 8080 on host to port 80 in container, --name = friendly name'},
-          {language:'bash',title:'Check it works',code:'# Open http://localhost:8080 in your browser\n\n# Or use curl\ncurl http://localhost:8080\n\n# View logs\ndocker logs my-nginx\n\n# Stop and clean up\ndocker stop my-nginx\ndocker rm my-nginx',explanation:'You just ran a production web server in seconds!'}
+          {language:'bash',title:'Run Caddy web server (alternative)',code:'docker run -d -p 8080:80 --name my-caddy caddy:2-alpine',explanation:'Caddy is a modern web server with automatic HTTPS. Same flags, different image.'},
+          {language:'bash',title:'Check it works',code:'# Open http://localhost:8080 in your browser\n\n# Or use curl\ncurl http://localhost:8080\n\n# View logs\ndocker logs my-nginx   # or: docker logs my-caddy\n\n# Stop and clean up\ndocker stop my-nginx\ndocker rm my-nginx',explanation:'You just ran a production web server in seconds!'}
         ],
         diagrams:[{type:'mermaid',title:'What Just Happened',code:`sequenceDiagram
     participant You
@@ -90,10 +91,10 @@ export const levels = {
         content:`<p>Images are downloaded from <strong>registries</strong>. Docker Hub is the default public registry.</p>
         <p>Image naming convention: <code>[registry/]repository[:tag]</code></p>`,
         codeExamples:[
-          {language:'bash',title:'Pulling images',code:'# Pull latest (default tag)\ndocker pull nginx\n\n# Pull specific version\ndocker pull node:20-alpine\n\n# Pull from specific registry\ndocker pull gcr.io/google-containers/nginx\n\n# List local images\ndocker images\n\n# Image details\ndocker inspect nginx',explanation:'Always use specific tags in production — never rely on :latest'},
+          {language:'bash',title:'Pulling images',code:'# Pull latest (default tag)\ndocker pull nginx\n\n# Pull specific version\ndocker pull node:24-alpine\n\n# Pull from specific registry\ndocker pull gcr.io/google-containers/nginx\n\n# Pull Caddy server\ndocker pull caddy:2-alpine\n\n# List local images\ndocker images\n\n# Image details\ndocker inspect nginx',explanation:'Always use specific tags in production — never rely on :latest'},
           {language:'bash',title:'Image management',code:'# Remove an image\ndocker rmi nginx:latest\n\n# Remove all unused images\ndocker image prune -a\n\n# Tag an image\ndocker tag myapp:latest myapp:v1.0\n\n# Save image to tar file\ndocker save -o myapp.tar myapp:v1.0\n\n# Load image from tar\ndocker load -i myapp.tar',explanation:'Tagging is how you version your images'}
         ],
-        alerts:[{type:'warning',title:'Avoid :latest in Production',text:'The <code>:latest</code> tag is mutable — it can point to different versions over time. Always pin specific versions (e.g., <code>node:20.11-alpine</code>) for reproducible builds.'}],
+        alerts:[{type:'warning',title:'Avoid :latest in Production',text:'The <code>:latest</code> tag is mutable — it can point to different versions over time. Always pin specific versions (e.g., <code>node:24.1-alpine</code>) for reproducible builds.'}],
         keyTakeaways:['Always use specific image tags in production','Docker Hub is the default registry','docker image prune cleans unused images','Images can be saved/loaded as tar files for offline transfer']
       },
       {
@@ -109,7 +110,7 @@ export const levels = {
         content:`<p>A <strong>Dockerfile</strong> is a text file with instructions to build an image. Each instruction creates a <em>layer</em>.</p>`,
         codeExamples:[
           {language:'dockerfile',title:'Basic Dockerfile for a Node.js App',code:`# Base image
-FROM node:20-alpine
+FROM node:24-alpine
 
 # Set working directory
 WORKDIR /app
@@ -207,7 +208,7 @@ coverage
     A["Writable Container Layer<br>(ephemeral)"] --> B["Layer 4: COPY . .<br>(your code)"]
     B --> C["Layer 3: RUN npm install<br>(dependencies)"]
     C --> D["Layer 2: WORKDIR /app"]
-    D --> E["Layer 1: FROM node:20-alpine<br>(base image)"]
+    D --> E["Layer 1: FROM node:24-alpine<br>(base image)"]
     
     style A fill:#ef4444,color:#fff
     style B fill:#1a2035,color:#e2e8f0
@@ -292,7 +293,7 @@ coverage
           <li><strong>tmpfs</strong> — stored in memory only, never written to disk. For sensitive data.</li>
         </ul>`,
         codeExamples:[
-          {language:'bash',title:'Volume operations',code:'# Create named volume\ndocker volume create app-data\n\n# Run with named volume\ndocker run -v app-data:/var/lib/data postgres:16\n\n# Bind mount (development)\ndocker run -v $(pwd)/src:/app/src myapp\n\n# Read-only mount\ndocker run -v ./config.yml:/app/config.yml:ro myapp\n\n# tmpfs mount\ndocker run --tmpfs /tmp myapp\n\n# List and clean volumes\ndocker volume ls\ndocker volume prune',explanation:'Named volumes are preferred for databases. Bind mounts for dev. tmpfs for secrets.'}
+          {language:'bash',title:'Volume operations',code:'# Create named volume\ndocker volume create app-data\n\n# Run with named volume\ndocker run -v app-data:/var/lib/data postgres:18\n\n# Bind mount (development)\ndocker run -v $(pwd)/src:/app/src myapp\n\n# Read-only mount\ndocker run -v ./config.yml:/app/config.yml:ro myapp\n\n# tmpfs mount\ndocker run --tmpfs /tmp myapp\n\n# List and clean volumes\ndocker volume ls\ndocker volume prune',explanation:'Named volumes are preferred for databases. Bind mounts for dev. tmpfs for secrets.'}
         ],
         diagrams:[{type:'mermaid',title:'Volume Types',code:`graph LR
     subgraph Container
@@ -338,7 +339,7 @@ coverage
         content:`<p>Multi-stage builds let you use multiple FROM statements to create optimized images:</p>`,
         codeExamples:[
           {language:'dockerfile',title:'Multi-stage Dockerfile',code:`# Stage 1: Build
-FROM node:20 AS builder
+FROM node:24 AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -346,7 +347,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Production (only the built output)
-FROM node:20-alpine AS production
+FROM node:24-alpine AS production
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
@@ -355,7 +356,7 @@ EXPOSE 3000
 USER node
 CMD ["node", "dist/server.js"]`,explanation:'Builder stage has full Node.js + dev tools (~900MB). Production stage has only alpine + built code (~150MB).'},
           {language:'dockerfile',title:'Go example — minimal image',code:`# Build stage
-FROM golang:1.22 AS builder
+FROM golang:1.26 AS builder
 WORKDIR /app
 COPY . .
 RUN CGO_ENABLED=0 go build -o server .
@@ -373,7 +374,7 @@ ENTRYPOINT ["/server"]`,explanation:'Final image contains ONLY the compiled bina
         content:`<p>Smaller images = faster pulls, less storage, smaller attack surface.</p>`,
         codeExamples:[
           {language:'dockerfile',title:'Optimization techniques',code:`# 1. Use minimal base images
-FROM node:20-alpine   # ~180MB vs node:20 ~900MB
+FROM node:24-alpine   # ~180MB vs node:24 ~900MB
 
 # 2. Combine RUN commands
 RUN apt-get update && \\
@@ -389,7 +390,7 @@ COPY . .
 # 5. Don't install dev dependencies in prod
 # 6. Clean up in same layer`,explanation:'Each technique can reduce image size by 50-90%'}
         ],
-        alerts:[{type:'tip',title:'Size Comparison',text:'<strong>node:20</strong> = ~900MB | <strong>node:20-slim</strong> = ~200MB | <strong>node:20-alpine</strong> = ~180MB | <strong>distroless</strong> = ~120MB'}],
+        alerts:[{type:'tip',title:'Size Comparison',text:'<strong>node:24</strong> = ~900MB | <strong>node:24-slim</strong> = ~200MB | <strong>node:24-alpine</strong> = ~180MB | <strong>distroless</strong> = ~120MB'}],
         keyTakeaways:['Use alpine or distroless base images','Combine RUN commands to reduce layers','Install only production dependencies','Clean up cache in the same RUN command']
       },
       {
@@ -403,7 +404,7 @@ COPY . .
           <li><strong>Pin image versions</strong> — never use :latest in production</li>
           <li><strong>Read-only filesystem</strong> — prevent runtime modifications</li>
         </ul>`,
-        codeExamples:[{language:'dockerfile',title:'Secure Dockerfile',code:`FROM node:20-alpine
+        codeExamples:[{language:'dockerfile',title:'Secure Dockerfile',code:`FROM node:24-alpine
 
 # Create non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
@@ -452,7 +453,7 @@ CMD ["node", "server.js"]`,explanation:'Never run production containers as root.
       timeout: 5s
       retries: 3
     restart: unless-stopped`,explanation:'Deploy 3 replicas with health checks and resource limits'},
-          {language:'dockerfile',title:'Dockerfile HEALTHCHECK',code:`FROM node:20-alpine
+          {language:'dockerfile',title:'Dockerfile HEALTHCHECK',code:`FROM node:24-alpine
 WORKDIR /app
 COPY . .
 RUN npm ci --only=production
@@ -534,7 +535,7 @@ jobs:
         id:'real-world-architecture',title:'Real-World Container Architecture',
         content:'<p>Here\'s how Docker fits into a modern production system:</p>',
         diagrams:[{type:'mermaid',title:'Production Microservices Architecture',code:`graph TB
-    LB["Load Balancer<br>Nginx/Traefik"] --> API1["API Server 1"]
+    LB["Load Balancer<br>Nginx/Caddy/Traefik"] --> API1["API Server 1"]
     LB --> API2["API Server 2"]
     LB --> API3["API Server 3"]
     API1 --> Cache["Redis Cache"]

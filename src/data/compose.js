@@ -11,7 +11,7 @@ export const compose = {
       <h4>Why Docker Compose Exists</h4>
       <p>Real applications rarely run as a single container. A typical web app needs:</p>
       <ul>
-        <li>A web server (Nginx)</li>
+        <li>A web server (Nginx or Caddy)</li>
         <li>An application server (Node.js/Python/Go)</li>
         <li>A database (PostgreSQL/MongoDB)</li>
         <li>A cache (Redis)</li>
@@ -49,7 +49,7 @@ services:       # Container definitions (required)
     restart: unless-stopped
   
   db:
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     environment:
       POSTGRES_DB: myapp
       POSTGRES_USER: \${DB_USER}       # From .env file
@@ -63,7 +63,7 @@ services:       # Container definitions (required)
       retries: 5
   
   cache:
-    image: redis:7-alpine
+    image: redis:8-alpine
     command: redis-server --maxmemory 256mb
 
 networks:       # Custom network definitions (optional)
@@ -80,7 +80,7 @@ volumes:        # Named volume definitions
       codeExamples:[{language:'yaml',title:'Service configuration options',code:`services:
   myservice:
     # Image or Build (choose one)
-    image: node:20-alpine        # Use pre-built image
+    image: node:24-alpine        # Use pre-built image
     build:                       # OR build from Dockerfile
       context: ./app
       dockerfile: Dockerfile.prod
@@ -184,7 +184,7 @@ networks:
       content:'<p>Compose supports both named volumes and bind mounts:</p>',
       codeExamples:[{language:'yaml',title:'Volume patterns',code:`services:
   db:
-    image: postgres:16
+    image: postgres:18
     volumes:
       - db-data:/var/lib/postgresql/data   # Named volume
   

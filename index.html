@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Learning Hub — Master Containerization</title>
+  <meta name="description" content="A comprehensive, structured learning platform for Docker and containerization. From beginner to production-level, with practical guides, diagrams, and real-world examples.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐳</text></svg>">
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Logo -->
+      <div class="sidebar__header">
+        <div class="sidebar__logo">
+          <div class="sidebar__logo-icon">🐳</div>
+          <div>
+            <div class="sidebar__logo-text">Docker Hub</div>
+            <div class="sidebar__logo-sub">learning system</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="sidebar__search">
+        <div class="sidebar__search-wrapper">
+          <span class="sidebar__search-icon">🔍</span>
+          <input type="text" id="search-input" class="sidebar__search-input" placeholder="Search topics..." autocomplete="off">
+          <div class="search-results" id="search-results"></div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="sidebar__nav">
+        <!-- Quick Access -->
+        <div class="sidebar__section">
+          <div class="sidebar__section-label">Quick Access</div>
+          <div class="sidebar__item" data-route="quick-notes">
+            <span class="sidebar__item-icon">⚡</span>
+            <span>Quick Notes</span>
+          </div>
+          <div class="sidebar__item" data-route="overview">
+            <span class="sidebar__item-icon">🐳</span>
+            <span>Docker Overview</span>
+          </div>
+        </div>
+
+        <!-- Learning Levels -->
+        <div class="sidebar__section">
+          <div class="sidebar__section-label">Learning Path</div>
+          <div class="sidebar__item" data-expand="levels-sub">
+            <span class="sidebar__item-icon">📚</span>
+            <span>Learning Levels</span>
+            <span class="sidebar__toggle-expand">▶</span>
+          </div>
+          <div class="sidebar__subitems" id="levels-sub">
+            <div class="sidebar__subitem" data-route="level-0">
+              <span class="sidebar__item-badge badge--beginner">L0</span>
+              <span>Beginner</span>
+            </div>
+            <div class="sidebar__subitem" data-route="level-1">
+              <span class="sidebar__item-badge badge--basic">L1</span>
+              <span>Basic Usage</span>
+            </div>
+            <div class="sidebar__subitem" data-route="level-2">
+              <span class="sidebar__item-badge badge--intermediate">L2</span>
+              <span>Internal Working</span>
+            </div>
+            <div class="sidebar__subitem" data-route="level-3">
+              <span class="sidebar__item-badge badge--advanced">L3</span>
+              <span>Advanced Concepts</span>
+            </div>
+            <div class="sidebar__subitem" data-route="level-4">
+              <span class="sidebar__item-badge badge--expert">L4</span>
+              <span>Production Level</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Topics -->
+        <div class="sidebar__section">
+          <div class="sidebar__section-label">Core Topics</div>
+          <div class="sidebar__item" data-route="compose">
+            <span class="sidebar__item-icon">🎼</span>
+            <span>Docker Compose</span>
+          </div>
+          <div class="sidebar__item" data-route="features">
+            <span class="sidebar__item-icon">🔧</span>
+            <span>Features & Services</span>
+          </div>
+          <div class="sidebar__item" data-route="tools">
+            <span class="sidebar__item-icon">🛠️</span>
+            <span>Tools & Alternatives</span>
+          </div>
+          <div class="sidebar__item" data-route="integrations">
+            <span class="sidebar__item-icon">🔗</span>
+            <span>Integrations</span>
+          </div>
+        </div>
+
+        <!-- Practical -->
+        <div class="sidebar__section">
+          <div class="sidebar__section-label">Practical</div>
+          <div class="sidebar__item" data-route="implementation">
+            <span class="sidebar__item-icon">🖥️</span>
+            <span>Implementation Methods</span>
+          </div>
+          <div class="sidebar__item" data-route="guides">
+            <span class="sidebar__item-icon">📋</span>
+            <span>Practical Guides</span>
+          </div>
+          <div class="sidebar__item" data-route="system-design">
+            <span class="sidebar__item-icon">🏗️</span>
+            <span>System Design</span>
+          </div>
+        </div>
+
+        <!-- Reference -->
+        <div class="sidebar__section">
+          <div class="sidebar__section-label">Reference</div>
+          <div class="sidebar__item" data-route="mistakes">
+            <span class="sidebar__item-icon">⚠️</span>
+            <span>Common Mistakes</span>
+          </div>
+          <div class="sidebar__item" data-route="glossary">
+            <span class="sidebar__item-icon">📖</span>
+            <span>Glossary</span>
+          </div>
+          <div class="sidebar__item" data-route="resources">
+            <span class="sidebar__item-icon">🔗</span>
+            <span>Verified Sources</span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Footer Progress -->
+      <div class="sidebar__footer">
+        <div class="sidebar__progress">
+          <div class="sidebar__progress-label">
+            <span>Progress</span>
+            <span id="progress-label">0% complete</span>
+          </div>
+          <div class="sidebar__progress-bar">
+            <div class="sidebar__progress-fill" id="progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Top Bar -->
+      <div class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__hamburger" id="hamburger">☰</button>
+          <div class="topbar__breadcrumb" id="breadcrumb">
+            <span>docker-hub</span>
+            <span class="topbar__breadcrumb-sep">/</span>
+            <span class="topbar__breadcrumb-current">Quick Notes</span>
+          </div>
+        </div>
+        <div class="topbar__right">
+          <button class="topbar__btn" onclick="window.__app.toggleBookmarksPanel()">
+            <span>★</span> <span>Bookmarks</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="content" id="content-area">
+        <div class="content__inner" id="content-inner">
+          <!-- Content rendered here by JS -->
+          <div style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:1rem">
+            <div style="font-size:3rem" class="animate-float">🐳</div>
+            <div style="font-family:var(--font-display);color:var(--accent-cyan);font-size:1.5rem">Loading Docker Learning Hub...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bookmarks Panel -->
+    <div class="bookmarks-panel" id="bookmarks-panel">
+      <div class="bookmarks-panel__header">
+        <div class="bookmarks-panel__title">★ Bookmarks</div>
+        <button class="bookmarks-panel__close" id="bookmarks-close">✕</button>
+      </div>
+      <div class="bookmarks-panel__body" id="bookmarks-panel-body">
+        <div class="bookmarks-panel__empty">No bookmarks yet.<br>Click ☆ to save sections.</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

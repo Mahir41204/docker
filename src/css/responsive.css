@@ -1,0 +1,58 @@
+/* ============================================
+   RESPONSIVE.CSS — Mobile/Tablet Breakpoints
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .content {
+    padding: var(--space-xl) var(--space-xl);
+  }
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    z-index: var(--z-sidebar);
+    box-shadow: var(--shadow-lg);
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  .sidebar-overlay.visible {
+    display: block;
+  }
+  .topbar__hamburger {
+    display: block;
+  }
+  .content {
+    padding: var(--space-lg) var(--space-md);
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  h1 { font-size: var(--text-2xl); }
+  h2 { font-size: var(--text-xl); }
+  .page-header__meta { flex-direction: column; align-items: flex-start; }
+  .level-card { flex-direction: column; text-align: center; }
+  .glossary-item { flex-direction: column; gap: var(--space-sm); }
+  .glossary-item__term { min-width: auto; }
+  .topbar__right .topbar__btn span { display: none; }
+  .bookmarks-panel { width: 100%; right: -100%; }
+  .comparison-table { font-size: var(--text-xs); }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .content { padding: var(--space-md) var(--space-sm); }
+  .card { padding: var(--space-md); }
+  .code-block__body { padding: var(--space-md); }
+  .tabs__header { gap: 0; }
+  .tabs__tab { padding: var(--space-sm) var(--space-md); font-size: var(--text-xs); }
+}

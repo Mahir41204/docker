@@ -76,11 +76,41 @@ class App {
     // Initialize bookmarks panel
     this.initBookmarksPanel();
 
+    // Initialize Theme Toggle
+    this.initThemeToggle();
+
     // Start router
     this.router.init();
 
     // Update progress on load
     this.renderer.progress.updateSidebarProgress();
+  }
+
+  initThemeToggle() {
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    // Check localStorage or system preference
+    const savedTheme = localStorage.getItem('docker-hub-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      toggle.checked = true;
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      toggle.checked = false;
+    }
+
+    toggle.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('docker-hub-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('docker-hub-theme', 'light');
+      }
+    });
   }
 
   loadPage(route) {

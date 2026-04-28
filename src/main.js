@@ -7,6 +7,7 @@ import './css/layout.css';
 import './css/components.css';
 import './css/animations.css';
 import './css/responsive.css';
+import './css/theme-switch.css';
 import App from './js/app.js';
 
 // Initialize Mermaid

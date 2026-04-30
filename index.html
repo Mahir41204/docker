@@ -5,17 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Docker Learning Hub — Master Containerization</title>
   <meta name="description" content="A comprehensive, structured learning platform for Docker and containerization. From beginner to production-level, with practical guides, diagrams, and real-world examples.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐳</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Docker Learning Hub — Master Containerization">
+  <meta property="og:description" content="A comprehensive, structured learning platform for Docker and containerization.">
+  <meta property="og:image" content="https://docker-learning-hub.com/favicon-512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://docker-learning-hub.com/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Docker Learning Hub — Master Containerization">
+  <meta name="twitter:description" content="A comprehensive, structured learning platform for Docker and containerization.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://docker-learning-hub.com/">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+  <link rel="apple-touch-icon" href="/favicon-192.png">
+
+  <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6236637117709087"
      crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- Skip to Content (Accessibility) -->
+  <a href="#content-area" class="skip-to-content">Skip to main content</a>
+
   <div class="app" id="app">
     <!-- Sidebar Overlay (mobile) -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
     <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Documentation sidebar">
       <!-- Logo -->
       <div class="sidebar__header">
         <div class="sidebar__logo">
@@ -30,36 +55,49 @@
       <!-- Search -->
       <div class="sidebar__search">
         <div class="sidebar__search-wrapper">
-          <span class="sidebar__search-icon">🔍</span>
-          <input type="text" id="search-input" class="sidebar__search-input" placeholder="Search topics..." autocomplete="off">
-          <div class="search-results" id="search-results"></div>
+          <span class="sidebar__search-icon" aria-hidden="true">🔍</span>
+          <input type="text"
+                 id="search-input"
+                 class="sidebar__search-input"
+                 placeholder="Search topics..."
+                 autocomplete="off"
+                 aria-label="Search documentation"
+                 role="combobox"
+                 aria-expanded="false"
+                 aria-controls="search-results"
+                 aria-autocomplete="list">
+          <kbd class="search-shortcut-badge" aria-hidden="true">⌘K</kbd>
+          <div class="search-results"
+               id="search-results"
+               role="listbox"
+               aria-label="Search results"></div>
         </div>
       </div>
 
       <!-- Navigation -->
-      <nav class="sidebar__nav">
+      <nav class="sidebar__nav" aria-label="Main navigation">
         <!-- Quick Access -->
         <div class="sidebar__section">
-          <div class="sidebar__section-label">Quick Access</div>
+          <div class="sidebar__section-label" id="nav-quick-access">Quick Access</div>
           <div class="sidebar__item" data-route="quick-notes">
-            <span class="sidebar__item-icon">⚡</span>
+            <span class="sidebar__item-icon" aria-hidden="true">⚡</span>
             <span>Quick Notes</span>
           </div>
           <div class="sidebar__item" data-route="overview">
-            <span class="sidebar__item-icon">🐳</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🐳</span>
             <span>Docker Overview</span>
           </div>
         </div>
 
         <!-- Learning Levels -->
         <div class="sidebar__section">
-          <div class="sidebar__section-label">Learning Path</div>
+          <div class="sidebar__section-label" id="nav-learning-path">Learning Path</div>
           <div class="sidebar__item" data-expand="levels-sub">
-            <span class="sidebar__item-icon">📚</span>
+            <span class="sidebar__item-icon" aria-hidden="true">📚</span>
             <span>Learning Levels</span>
-            <span class="sidebar__toggle-expand">▶</span>
+            <span class="sidebar__toggle-expand" aria-hidden="true">▶</span>
           </div>
-          <div class="sidebar__subitems" id="levels-sub">
+          <div class="sidebar__subitems" id="levels-sub" role="group" aria-label="Learning level pages">
             <div class="sidebar__subitem" data-route="level-0">
               <span class="sidebar__item-badge badge--beginner">L0</span>
               <span>Beginner</span>
@@ -85,59 +123,59 @@
 
         <!-- Core Topics -->
         <div class="sidebar__section">
-          <div class="sidebar__section-label">Core Topics</div>
+          <div class="sidebar__section-label" id="nav-core-topics">Core Topics</div>
           <div class="sidebar__item" data-route="compose">
-            <span class="sidebar__item-icon">🎼</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🎼</span>
             <span>Docker Compose</span>
           </div>
           <div class="sidebar__item" data-route="features">
-            <span class="sidebar__item-icon">🔧</span>
-            <span>Features & Services</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🔧</span>
+            <span>Features &amp; Services</span>
           </div>
           <div class="sidebar__item" data-route="tools">
-            <span class="sidebar__item-icon">🛠️</span>
-            <span>Tools & Alternatives</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🛠️</span>
+            <span>Tools &amp; Alternatives</span>
           </div>
           <div class="sidebar__item" data-route="integrations">
-            <span class="sidebar__item-icon">🔗</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🔗</span>
             <span>Integrations</span>
           </div>
           <div class="sidebar__item" data-route="languages">
-            <span class="sidebar__item-icon">🌍</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🌍</span>
             <span>Universal Language Support</span>
           </div>
         </div>
 
         <!-- Practical -->
         <div class="sidebar__section">
-          <div class="sidebar__section-label">Practical</div>
+          <div class="sidebar__section-label" id="nav-practical">Practical</div>
           <div class="sidebar__item" data-route="implementation">
-            <span class="sidebar__item-icon">🖥️</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🖥️</span>
             <span>Implementation Methods</span>
           </div>
           <div class="sidebar__item" data-route="guides">
-            <span class="sidebar__item-icon">📋</span>
+            <span class="sidebar__item-icon" aria-hidden="true">📋</span>
             <span>Practical Guides</span>
           </div>
           <div class="sidebar__item" data-route="system-design">
-            <span class="sidebar__item-icon">🏗️</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🏗️</span>
             <span>System Design</span>
           </div>
         </div>
 
         <!-- Reference -->
         <div class="sidebar__section">
-          <div class="sidebar__section-label">Reference</div>
+          <div class="sidebar__section-label" id="nav-reference">Reference</div>
           <div class="sidebar__item" data-route="mistakes">
-            <span class="sidebar__item-icon">⚠️</span>
+            <span class="sidebar__item-icon" aria-hidden="true">⚠️</span>
             <span>Common Mistakes</span>
           </div>
           <div class="sidebar__item" data-route="glossary">
-            <span class="sidebar__item-icon">📖</span>
+            <span class="sidebar__item-icon" aria-hidden="true">📖</span>
             <span>Glossary</span>
           </div>
           <div class="sidebar__item" data-route="resources">
-            <span class="sidebar__item-icon">🔗</span>
+            <span class="sidebar__item-icon" aria-hidden="true">🔗</span>
             <span>Verified Sources</span>
           </div>
         </div>
@@ -150,7 +188,7 @@
             <span>Progress</span>
             <span id="progress-label">0% complete</span>
           </div>
-          <div class="sidebar__progress-bar">
+          <div class="sidebar__progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Learning progress">
             <div class="sidebar__progress-fill" id="progress-fill" style="width: 0%"></div>
           </div>
         </div>
@@ -158,20 +196,24 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="main">
+    <main class="main" aria-label="Main content">
       <!-- Top Bar -->
-      <div class="topbar">
+      <div class="topbar" role="banner">
         <div class="topbar__left">
-          <button class="topbar__hamburger" id="hamburger">☰</button>
-          <div class="topbar__breadcrumb" id="breadcrumb">
+          <button class="topbar__hamburger"
+                  id="hamburger"
+                  aria-label="Toggle navigation"
+                  aria-expanded="false"
+                  aria-controls="sidebar">☰</button>
+          <nav class="topbar__breadcrumb" id="breadcrumb" aria-label="Breadcrumb">
             <span>docker-hub</span>
-            <span class="topbar__breadcrumb-sep">/</span>
+            <span class="topbar__breadcrumb-sep" aria-hidden="true">/</span>
             <span class="topbar__breadcrumb-current">Quick Notes</span>
-          </div>
+          </nav>
         </div>
         <div class="topbar__right">
-          <label class="theme-switch">
-            <input type="checkbox" class="theme-switch__checkbox" id="theme-toggle">
+          <label class="theme-switch" aria-label="Toggle dark mode">
+            <input type="checkbox" class="theme-switch__checkbox" id="theme-toggle" aria-label="Toggle dark mode">
             <div class="theme-switch__container">
               <div class="theme-switch__clouds"></div>
               <div class="theme-switch__stars-container">
@@ -190,8 +232,10 @@
               </div>
             </div>
           </label>
-          <button class="topbar__btn" onclick="window.__app.toggleBookmarksPanel()">
-            <span>★</span> <span>Bookmarks</span>
+          <button class="topbar__btn topbar__btn--bookmarks"
+                  onclick="window.__app.toggleBookmarksPanel()"
+                  aria-label="Open bookmarks panel">
+            <span aria-hidden="true">★</span> <span>Bookmarks</span>
           </button>
         </div>
       </div>
@@ -201,20 +245,29 @@
         <div class="content__inner" id="content-inner">
           <!-- Content rendered here by JS -->
           <div style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:1rem">
-            <div style="font-size:3rem" class="animate-float">🐳</div>
+            <div style="font-size:3rem" class="animate-float" aria-hidden="true">🐳</div>
             <div style="font-family:var(--font-display);color:var(--accent-cyan);font-size:1.5rem">Loading Docker Learning Hub...</div>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- Bookmarks Panel -->
-    <div class="bookmarks-panel" id="bookmarks-panel">
+    <!-- Bookmarks Panel (Accessible Dialog) -->
+    <div class="bookmarks-panel"
+         id="bookmarks-panel"
+         role="dialog"
+         aria-modal="true"
+         aria-label="Bookmarks panel"
+         aria-hidden="true">
       <div class="bookmarks-panel__header">
         <div class="bookmarks-panel__title">★ Bookmarks</div>
-        <button class="bookmarks-panel__close" id="bookmarks-close">✕</button>
+        <button class="bookmarks-panel__close"
+                id="bookmarks-close"
+                aria-label="Close bookmarks panel">✕</button>
       </div>
-      <div class="bookmarks-panel__body" id="bookmarks-panel-body">
+      <div class="bookmarks-panel__body"
+           id="bookmarks-panel-body"
+           role="list">
         <div class="bookmarks-panel__empty">No bookmarks yet.<br>Click ☆ to save sections.</div>
       </div>
     </div>

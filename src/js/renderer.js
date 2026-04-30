@@ -1,19 +1,33 @@
 // ============================================
 // RENDERER.JS — Content to HTML Renderer
 // ============================================
+// Enhanced with:
+//   - ARIA attributes on all interactive elements
+//   - SEO metadata updates per page
+//   - Reading progress bar
+//   - Analytics hooks
+//   - Keyboard-accessible controls
 
 import BookmarkManager from './bookmarks.js';
 import ProgressManager from './progress.js';
+import SEOManager from './seo.js';
 
 class Renderer {
   constructor() {
     this.bookmarks = new BookmarkManager();
     this.progress = new ProgressManager();
+    this.seo = new SEOManager();
     this.contentEl = document.getElementById('content-inner');
+    this._currentRoute = null;
   }
 
   render(page, route) {
     if (!page || !this.contentEl) return;
+
+    // Stop previous scroll tracking
+    this.progress.stopScrollTracking();
+
+    this._currentRoute = route;
     let html = '';
 
     // Page header
@@ -48,20 +62,91 @@ class Renderer {
 
     this.contentEl.innerHTML = html;
 
+    // Inject reading progress bar into content-area (outside content__inner)
+    this._injectReadingProgressBar();
+
     // Initialize interactive elements
     this.initCodeCopy();
     this.initTabs();
     this.initMermaid();
+    this.initKeyboardNav();
+    this.bookmarks.initDOM();
     this.bookmarks.updateUI();
     this.progress.updateUI();
+
+    // Start scroll tracking for this page
+    this.progress.startScrollTracking(route);
+    this._initReadingProgress();
+
+    // Update SEO metadata
+    this.seo.update({
+      title: page.title,
+      description: page.subtitle || this._extractDescription(page),
+      route: route,
+      type: route === 'overview' ? 'website' : 'article',
+    });
 
     // Re-animate
     this.contentEl.style.animation = 'none';
     this.contentEl.offsetHeight; // trigger reflow
     this.contentEl.style.animation = 'fadeIn 0.3s ease';
 
-    // Scroll to top
-    document.getElementById('content-area').scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to top (or restore position)
+    const contentArea = document.getElementById('content-area');
+    if (contentArea) {
+      contentArea.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  }
+
+  /**
+   * Extract a description from the page content for SEO.
+   */
+  _extractDescription(page) {
+    if (page.sections && page.sections.length > 0) {
+      const first = page.sections[0];
+      const text = (first.content || first.title || '').replace(/<[^>]+>/g, '');
+      return text.slice(0, 160);
+    }
+    return '';
+  }
+
+  /**
+   * Inject the reading progress bar outside of the scroll container,
+   * directly below the topbar so it sits perfectly flush.
+   */
+  _injectReadingProgressBar() {
+    const contentArea = document.getElementById('content-area');
+    if (!contentArea) return;
+
+    // Remove existing bar if present
+    const existing = document.getElementById('reading-progress');
+    if (existing) existing.remove();
+
+    const bar = document.createElement('div');
+    bar.className = 'reading-progress';
+    bar.id = 'reading-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    bar.innerHTML = '<div class="reading-progress__fill" id="reading-progress-fill"></div>';
+    
+    // Insert before contentArea so it sits right under topbar
+    contentArea.parentNode.insertBefore(bar, contentArea);
+  }
+
+  /**
+   * Initialize the reading progress bar that shows scroll position.
+   */
+  _initReadingProgress() {
+    const contentArea = document.getElementById('content-area');
+    const fill = document.getElementById('reading-progress-fill');
+    if (!contentArea || !fill) return;
+
+    const updateBar = () => {
+      const pct = this.progress.getCurrentScrollPercent();
+      fill.style.width = pct + '%';
+    };
+
+    contentArea.addEventListener('scroll', updateBar, { passive: true });
+    updateBar();
   }
 
   renderPageHeader(page, route) {
@@ -71,7 +156,11 @@ class Renderer {
         ${page.icon ? `<div class="page-header__icon">${page.icon}</div>` : ''}
         <div style="display:flex;align-items:center;gap:var(--space-md);justify-content:space-between;flex-wrap:wrap">
           <h1 class="page-header__title">${page.title || ''}</h1>
-          <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" data-id="${route}" onclick="window.__app.toggleBookmark('${route}', '${this.escapeAttr(page.title || '')}', '${this.escapeAttr(page.section || '')}')">${isBookmarked ? '★' : '☆'}</button>
+          <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}"
+                  data-id="${route}"
+                  onclick="window.__app.toggleBookmark('${route}', '${this.escapeAttr(page.title || '')}', '${this.escapeAttr(page.section || '')}')"
+                  aria-label="${isBookmarked ? 'Remove bookmark' : 'Bookmark this page'}"
+                  aria-pressed="${isBookmarked}">${isBookmarked ? '★' : '☆'}</button>
         </div>
         ${page.subtitle ? `<p class="page-header__subtitle">${page.subtitle}</p>` : ''}
         ${page.meta ? `<div class="page-header__meta">
@@ -85,7 +174,8 @@ class Renderer {
 
   renderSection(section, route, index) {
     const sectionId = `${route}/${section.id || index}`;
-    let html = `<div class="section-block animate-fade-in delay-${Math.min(index + 1, 6)}">`;
+    const isCompleted = this.progress.isCompleted(sectionId);
+    let html = `<div class="section-block animate-fade-in delay-${Math.min(index + 1, 6)}" id="section-${section.id || index}">`;
 
     if (section.title) {
       html += `<h2>${section.title}</h2>`;
@@ -160,10 +250,16 @@ class Renderer {
       });
     }
 
-    // Section completion checkbox
-    html += `<div class="section-complete" data-section-id="${sectionId}" onclick="window.__app.toggleProgress('${sectionId}')">
-      <div class="section-complete__checkbox"></div>
-      <span class="section-complete__label">Mark as completed</span>
+    // Section completion checkbox with ARIA
+    html += `<div class="section-complete ${isCompleted ? 'completed' : ''}"
+                 data-section-id="${sectionId}"
+                 onclick="window.__app.toggleProgress('${sectionId}')"
+                 role="checkbox"
+                 aria-checked="${isCompleted}"
+                 aria-label="Mark section as completed: ${this.escapeAttr(section.title || 'Section ' + (index + 1))}"
+                 tabindex="0">
+      <div class="section-complete__checkbox">${isCompleted ? '✓' : ''}</div>
+      <span class="section-complete__label">${isCompleted ? 'Completed' : 'Mark as completed'}</span>
     </div>`;
 
     html += `</div>`;
@@ -182,7 +278,9 @@ class Renderer {
         ${code.title ? `<span class="code-block__title">${code.title}</span>` : ''}
         <div style="display:flex;gap:var(--space-sm);align-items:center">
           <span class="code-block__lang">${code.language || 'shell'}</span>
-          <button class="code-block__copy" onclick="window.__app.copyCode(this)">copy</button>
+          <button class="code-block__copy"
+                  onclick="window.__app.copyCode(this)"
+                  aria-label="Copy code to clipboard">copy</button>
         </div>
       </div>
       <div class="code-block__body"><code>${escaped}</code></div>
@@ -192,7 +290,7 @@ class Renderer {
 
   renderDiagram(diagram) {
     if (diagram.type === 'mermaid') {
-      return `<div class="diagram-container">
+      return `<div class="diagram-container" role="img" aria-label="${this.escapeAttr(diagram.title || 'Diagram')}">
         ${diagram.title ? `<div class="diagram-container__title">📊 ${diagram.title}</div>` : ''}
         <div class="mermaid">${diagram.code}</div>
       </div>`;
@@ -208,8 +306,9 @@ class Renderer {
 
   renderAlert(alert) {
     const icons = { info: 'ℹ️', warning: '⚠️', success: '✅', danger: '🚫', tip: '💡' };
-    return `<div class="alert alert--${alert.type || 'info'}">
-      <span class="alert__icon">${icons[alert.type] || 'ℹ️'}</span>
+    const roles = { warning: 'alert', danger: 'alert', info: 'note', success: 'status', tip: 'note' };
+    return `<div class="alert alert--${alert.type || 'info'}" role="${roles[alert.type] || 'note'}">
+      <span class="alert__icon" aria-hidden="true">${icons[alert.type] || 'ℹ️'}</span>
       <div class="alert__content">
         ${alert.title ? `<div class="alert__title">${alert.title}</div>` : ''}
         <div class="alert__text">${alert.text}</div>
@@ -218,9 +317,9 @@ class Renderer {
   }
 
   renderSteps(steps) {
-    return `<div class="steps">${steps.map((s, i) => `
-      <div class="step">
-        <div class="step__number">${i + 1}</div>
+    return `<div class="steps" role="list">${steps.map((s, i) => `
+      <div class="step" role="listitem">
+        <div class="step__number" aria-hidden="true">${i + 1}</div>
         <div class="step__content">
           <div class="step__title">${s.title}</div>
           <div class="step__desc">${s.desc || ''}</div>
@@ -232,8 +331,8 @@ class Renderer {
 
   renderCardGrid(page) {
     const cardClass = page.cardClass || '';
-    return `<div class="card-grid">${page.cards.map(c => `
-      <div class="quick-note-card ${cardClass} ${c.colorClass || ''}">
+    return `<div class="card-grid" role="list">${page.cards.map(c => `
+      <div class="quick-note-card ${cardClass} ${c.colorClass || ''}" role="listitem">
         <div class="quick-note-card__title">${c.icon || ''} ${c.title}</div>
         <div class="quick-note-card__content">${c.content || ''}
           ${c.items ? `<ul>${c.items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}
@@ -244,12 +343,12 @@ class Renderer {
 
   renderItems(page) {
     if (page.itemType === 'glossary') {
-      return page.items.map(i => `
+      return `<dl class="glossary-list">${page.items.map(i => `
         <div class="glossary-item">
-          <div class="glossary-item__term">${i.term}</div>
-          <div class="glossary-item__def">${i.definition}</div>
+          <dt class="glossary-item__term">${i.term}</dt>
+          <dd class="glossary-item__def">${i.definition}</dd>
         </div>
-      `).join('');
+      `).join('')}</dl>`;
     }
     // Resource items
     return page.items.map(i => `
@@ -259,34 +358,62 @@ class Renderer {
           ${i.badge ? `<span class="difficulty-badge difficulty-badge--${i.badge}">${i.badge}</span>` : ''}
         </div>
         <div class="card__body">${i.desc || i.content || ''}</div>
-        ${i.url ? `<a href="${i.url}" target="_blank" rel="noopener" style="font-size:var(--text-sm)">Visit →</a>` : ''}
+        ${i.url ? `<a href="${i.url}" target="_blank" rel="noopener noreferrer" style="font-size:var(--text-sm)">Visit →</a>` : ''}
       </div>
     `).join('');
   }
 
   renderLevelCards(levels) {
     return levels.map(l => `
-      <div class="level-card" onclick="window.location.hash='${l.route}'">
-        <div class="level-card__level level-card__level--${l.level}">${l.level}</div>
+      <div class="level-card"
+           onclick="window.location.hash='${l.route}'"
+           role="link"
+           tabindex="0"
+           aria-label="Go to ${this.escapeAttr(l.title)}">
+        <div class="level-card__level level-card__level--${l.level}" aria-hidden="true">${l.level}</div>
         <div class="level-card__info">
           <div class="level-card__title">${l.title}</div>
           <div class="level-card__desc">${l.desc}</div>
-          <div class="level-card__progress-bar">
+          <div class="level-card__progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
             <div class="level-card__progress-fill" style="width:0%;background:${l.color}"></div>
           </div>
         </div>
-        <div class="level-card__arrow">→</div>
+        <div class="level-card__arrow" aria-hidden="true">→</div>
       </div>
     `).join('');
   }
 
   renderComparisonTable(table) {
-    return `<div class="comparison-table">
+    return `<div class="comparison-table" role="region" aria-label="Comparison table">
       <table>
-        <thead><tr>${table.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+        <thead><tr>${table.headers.map(h => `<th scope="col">${h}</th>`).join('')}</tr></thead>
         <tbody>${table.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
       </table>
     </div>`;
+  }
+
+  // ── Keyboard Navigation ──
+
+  initKeyboardNav() {
+    // Make section-complete checkboxes keyboard accessible
+    document.querySelectorAll('.section-complete').forEach(el => {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    });
+
+    // Make level cards keyboard accessible
+    document.querySelectorAll('.level-card').forEach(el => {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    });
   }
 
   // Utilities
@@ -317,10 +444,11 @@ class Renderer {
 
   initMermaid() {
     if (window.mermaid) {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       window.mermaid.initialize({
         startOnLoad: false,
-        theme: 'dark',
-        themeVariables: {
+        theme: isDark ? 'dark' : 'default',
+        themeVariables: isDark ? {
           primaryColor: '#1a2035',
           primaryTextColor: '#e2e8f0',
           primaryBorderColor: '#22d3ee',
@@ -329,6 +457,16 @@ class Renderer {
           tertiaryColor: '#111827',
           noteBkgColor: '#1a2035',
           noteTextColor: '#e2e8f0',
+          fontSize: '14px'
+        } : {
+          primaryColor: '#e2e8f0',
+          primaryTextColor: '#111827',
+          primaryBorderColor: '#0070f3',
+          lineColor: '#4b5563',
+          secondaryColor: '#f1f5f9',
+          tertiaryColor: '#ffffff',
+          noteBkgColor: '#f1f5f9',
+          noteTextColor: '#111827',
           fontSize: '14px'
         }
       });

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2496ed"/>
+      <stop offset="100%" style="stop-color:#0070f3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <g transform="translate(80, 140) scale(0.7)" fill="white">
+    <!-- Docker whale body -->
+    <path d="M257 140c-2-11-10-20-22-26 5-7 6-16 4-24-3-10-10-17-20-20-3-12-13-20-25-20-8 0-15 3-20 9-6-4-13-6-20-6-15 0-28 9-33 22-14 2-25 12-28 26-4 17 4 34 18 43l0 0c0 0 0 0 0 0 3 2 5 3 8 4l0 0c8 5 18 7 28 7l56 0c24 0 44-14 53-36 1 7 1 14-1 21z"/>
+    <!-- Container blocks on whale -->
+    <rect x="84" y="50" width="36" height="30" rx="4" fill="rgba(255,255,255,0.9)" stroke="#2496ed" stroke-width="2"/>
+    <rect x="126" y="50" width="36" height="30" rx="4" fill="rgba(255,255,255,0.9)" stroke="#2496ed" stroke-width="2"/>
+    <rect x="168" y="50" width="36" height="30" rx="4" fill="rgba(255,255,255,0.9)" stroke="#2496ed" stroke-width="2"/>
+    <rect x="126" y="14" width="36" height="30" rx="4" fill="rgba(255,255,255,0.9)" stroke="#2496ed" stroke-width="2"/>
+    <rect x="168" y="14" width="36" height="30" rx="4" fill="rgba(255,255,255,0.9)" stroke="#2496ed" stroke-width="2"/>
+    <!-- Simplified whale shape -->
+    <path d="M50 86 C20 86 0 106 0 136 C0 186 30 226 90 246 L260 246 C310 246 350 216 370 176 C380 156 380 126 370 106 L50 86Z" fill="white" opacity="0.95"/>
+    <circle cx="300" cy="156" r="10" fill="#2496ed"/>
+    <!-- Water -->
+    <path d="M0 260 Q40 240 80 260 Q120 280 160 260 Q200 240 240 260 Q280 280 320 260 Q360 240 400 260 L400 300 L0 300Z" fill="rgba(255,255,255,0.3)"/>
+  </g>
+</svg>

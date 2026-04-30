@@ -165,7 +165,7 @@
 .bookmarks-panel__close { background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; }
 .bookmarks-panel__body { flex: 1; overflow-y: auto; padding: var(--space-md); }
 .bookmarks-panel__empty { text-align: center; padding: var(--space-2xl); color: var(--text-muted); }
-.bookmarks-panel__item { padding: var(--space-md); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); margin-bottom: var(--space-sm); cursor: pointer; transition: all var(--transition-fast); }
+.bookmarks-panel__item { padding: var(--space-md); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); margin-bottom: var(--space-sm); transition: all var(--transition-fast); }
 .bookmarks-panel__item:hover { border-color: var(--accent-cyan-dim); }
 .bookmarks-panel__item-title { font-size: var(--text-sm); color: var(--text-primary); font-weight: 500; }
 .bookmarks-panel__item-section { font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono); }
@@ -179,3 +179,220 @@
 /* Comparison Table */
 .comparison-table { overflow-x: auto; margin-bottom: var(--space-lg); }
 .comparison-table table { min-width: 600px; }
+
+/* ── Reading Progress Bar ── */
+.reading-progress {
+  height: 3px;
+  background: var(--bg-elevated);
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+.reading-progress__fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+  transition: width 100ms ease-out;
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.4);
+}
+
+/* ── Bookmark Panel Enhancements ── */
+.bookmarks-panel__close:hover {
+  color: var(--accent-red);
+}
+
+.bookmarks-panel__close:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.bookmarks-panel__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.bookmarks-panel__item-content {
+  flex: 1;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.bookmarks-panel__item-content:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.bookmarks-panel__item-page {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.bookmarks-panel__item-remove {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.bookmarks-panel__item-remove:hover {
+  color: var(--accent-red);
+  border-color: var(--accent-red-dim);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.bookmarks-panel__item-remove:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* ── Bookmark Count Badge ── */
+.bookmark-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--bg-primary);
+  background: var(--accent-amber);
+  border-radius: var(--radius-full);
+  margin-left: var(--space-xs);
+  line-height: 1;
+}
+
+/* ── Search Shortcut Badge ── */
+.search-shortcut-badge {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  pointer-events: none;
+  opacity: 0.7;
+  line-height: 1.4;
+}
+
+.sidebar__search-input:focus ~ .search-shortcut-badge {
+  opacity: 0;
+}
+
+/* ── Continue Reading Banner ── */
+.continue-banner {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.08), rgba(16, 185, 129, 0.08));
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  margin: 0 0 var(--space-lg);
+  padding: 0;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.continue-banner.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.continue-banner__content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.continue-banner__icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.continue-banner__text {
+  flex: 1;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  min-width: 150px;
+}
+
+.continue-banner__text strong {
+  color: var(--accent-cyan);
+}
+
+.continue-banner__btn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+.continue-banner__btn--go {
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
+  border-color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.continue-banner__btn--go:hover {
+  filter: brightness(1.15);
+}
+
+.continue-banner__btn--dismiss {
+  padding: 4px 8px;
+}
+
+.continue-banner__btn--dismiss:hover {
+  color: var(--accent-red);
+  border-color: var(--accent-red-dim);
+}
+
+/* ── Glossary Semantic List ── */
+.glossary-list {
+  margin: 0;
+  padding: 0;
+}
+
+.glossary-list .glossary-item {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.glossary-list .glossary-item:last-child {
+  border-bottom: none;
+}
+
+/* ── Topbar Bookmarks Button ── */
+.topbar__btn--bookmarks {
+  position: relative;
+}

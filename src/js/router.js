@@ -19,7 +19,7 @@ class Router {
   }
 
   handleRoute() {
-    const hash = window.location.hash.slice(1) || 'quick-notes';
+    const hash = window.location.hash.slice(1) || 'overview';
     const parts = hash.split('/');
     const route = parts[0];
     const sub = parts.slice(1).join('/');
@@ -28,8 +28,8 @@ class Router {
 
     if (this.routes[route]) {
       this.routes[route](sub);
-    } else if (this.routes['quick-notes']) {
-      this.routes['quick-notes']();
+    } else if (this.routes['overview']) {
+      this.routes['overview']();
     }
 
     if (this.onRouteChange) {
@@ -38,7 +38,7 @@ class Router {
   }
 
   getCurrentRoute() {
-    return window.location.hash.slice(1) || 'quick-notes';
+    return window.location.hash.slice(1) || 'overview';
   }
 
   init() {

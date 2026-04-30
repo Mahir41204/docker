@@ -46,6 +46,9 @@
   .topbar__right .topbar__btn span { display: none; }
   .bookmarks-panel { width: 100%; right: -100%; }
   .comparison-table { font-size: var(--text-xs); }
+  .search-shortcut-badge { display: none; }
+  .continue-banner__content { gap: var(--space-sm); }
+  .continue-banner__text { min-width: 100%; }
 }
 
 /* Small mobile */

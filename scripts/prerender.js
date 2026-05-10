@@ -96,9 +96,23 @@ async function prerender() {
   const url = `http://localhost:${PORT}/`;
   console.log("Prerender: serving", DIST, "on", url);
 
-  const browser = await puppeteer.launch({
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  let browser;
+  try {
+    browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+  } catch (launchErr) {
+    console.warn(
+      "Prerender skipped: failed to launch browser:",
+      launchErr.message,
+    );
+    console.warn(
+      "This often happens in minimal CI images. To enable prerendering, install the system libraries required by Chromium or use a serverless Chromium build.",
+    );
+    server.close();
+    // Do not fail the whole build; skip prerendering instead.
+    return;
+  }
   try {
     const page = await browser.newPage();
     page.setDefaultNavigationTimeout(60000);

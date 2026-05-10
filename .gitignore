@@ -43,3 +43,8 @@ tmp/
 .venv/
 venv/
 env/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example

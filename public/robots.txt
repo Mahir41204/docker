@@ -1,4 +1,7 @@
+User-agent: Mediapartners-Google
+Allow: /
+
 User-agent: *
 Allow: /
 
-Sitemap: https://docker-learning-hub.com/sitemap.xml
+Sitemap: https://docker.wystone.tech/sitemap.xml

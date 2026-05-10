@@ -9,27 +9,58 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Docker Learning Hub — Master Containerization">
   <meta property="og:description" content="A comprehensive, structured learning platform for Docker and containerization.">
-  <meta property="og:image" content="https://docker-learning-hub.com/favicon-512.png">
+  <meta property="og:image" content="https://docker.wystone.tech/favicon-512.png">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://docker-learning-hub.com/">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Docker Learning Hub — Master Containerization">
-  <meta name="twitter:description" content="A comprehensive, structured learning platform for Docker and containerization.">
+  <meta property="og:url" content="https://docker.wystone.tech/">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://docker-learning-hub.com/">
+  <link rel="canonical" href="https://docker.wystone.tech/">
 
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
   <link rel="apple-touch-icon" href="/favicon-192.png">
+  <!-- Cookie consent (Wystone) - inserted to control AdSense loading -->
+  <style id="wystone-cookie-style">
+    #wystone-cookie-banner{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:99999;display:flex;gap:1rem;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:#ffffff;color:#0f172a;border-radius:12px;box-shadow:0 6px 24px rgba(2,6,23,0.12);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Work Sans","Chakra Petch","Fira Code",system-ui,sans-serif;border:1px solid rgba(15,23,42,0.06);max-width:980px;margin:0 auto}
+    #wystone-cookie-banner .wystone-text{flex:1;padding-right:1rem;font-size:0.95rem;color:#111827}
+    #wystone-cookie-banner .wystone-actions{display:flex;gap:0.5rem;align-items:center}
+    #wystone-cookie-banner button{cursor:pointer;border:0;padding:0.5rem 0.75rem;border-radius:8px;font-weight:600;font-size:0.9rem}
+    #wystone-cookie-banner .wystone-accept{background:linear-gradient(90deg,#0070f3,#2496ed);color:#fff}
+    #wystone-cookie-banner .wystone-decline{background:transparent;color:#374151;border:1px solid rgba(15,23,42,0.08)}
+    #wystone-cookie-banner a{color:#0070f3;text-decoration:none;margin-left:0.25rem}
+    @media (max-width:640px){#wystone-cookie-banner{flex-direction:column;align-items:flex-start}#wystone-cookie-banner .wystone-actions{width:100%;justify-content:flex-end}}
+  </style>
 
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6236637117709087"
-     crossorigin="anonymous"></script>
+  <script>
+  (function(){
+    var LS_KEY='wystone_cookie_consent';
+    var ADSENSE_CLIENT='ca-pub-6236637117709087';
+    var ADSENSE_SRC='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+encodeURIComponent(ADSENSE_CLIENT);
+    var GA_MEASUREMENT_ID='G-BMPGZRMLCK';
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;
+    try{gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied'});}catch(e){}
+    function loadGtag(){
+      if(document.querySelector('script[src*="googletagmanager.com/gtag/js?id="]'))return;
+      var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_MEASUREMENT_ID);document.head.appendChild(s);
+      try{window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;gtag('js', new Date());gtag('config', GA_MEASUREMENT_ID, {send_page_view: false});}catch(e){}
+    }
+    window.googletag=window.googletag||{cmd:[]};window.googletag.cmd.push(function(){try{if(window.googletag&&googletag.pubads&&googletag.pubads().setRequestNonPersonalizedAds){googletag.pubads().setRequestNonPersonalizedAds(1);}}catch(e){}});
+    function isAdsensePresent(){return !!document.querySelector('script[src^="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]');}
+    function loadAdsense(){if(isAdsensePresent())return;var s=document.createElement('script');s.async=true;s.src=ADSENSE_SRC;s.crossOrigin='anonymous';document.head.appendChild(s);}
+    function grantConsent(){try{localStorage.setItem(LS_KEY,'accepted');gtag('consent','update',{ad_storage:'granted',analytics_storage:'granted'});}catch(e){}window.googletag=window.googletag||{cmd:[]};window.googletag.cmd.push(function(){try{if(googletag.pubads&&googletag.pubads().setRequestNonPersonalizedAds){googletag.pubads().setRequestNonPersonalizedAds(0);}if(googletag.pubads&&googletag.pubads().refresh){googletag.pubads().refresh();}}catch(e){}});loadAdsense();loadGtag();}
+    function denyConsent(){try{localStorage.setItem(LS_KEY,'rejected');gtag('consent','update',{ad_storage:'denied',analytics_storage:'denied'});}catch(e){}window.googletag=window.googletag||{cmd:[]};window.googletag.cmd.push(function(){try{if(googletag.pubads&&googletag.pubads().setRequestNonPersonalizedAds){googletag.pubads().setRequestNonPersonalizedAds(1);}}catch(e){}});}
+    function showBanner(){if(document.getElementById('wystone-cookie-banner'))return;var banner=document.createElement('div');banner.id='wystone-cookie-banner';banner.innerHTML='<div class="wystone-text">We use Cloudflare for security and Google AdSense to serve ads. By clicking "Accept" you consent to personalized ads and analytics. You can also decline — we will not load personalized ads. See our <a href="/privacy-policy">Privacy Policy</a> for details.</div>'+'<div class="wystone-actions">'+'<button class="wystone-decline" id="wystone-decline">Decline</button>'+'<button class="wystone-accept" id="wystone-accept">Accept</button>'+'</div>';document.documentElement.appendChild(banner);document.getElementById('wystone-accept').addEventListener('click',function(){grantConsent();closeBanner();},{once:true});document.getElementById('wystone-decline').addEventListener('click',function(){denyConsent();closeBanner();},{once:true});}
+    function closeBanner(){var b=document.getElementById('wystone-cookie-banner');if(b)b.remove();}
+    function initConsent(){var stored=null;try{stored=localStorage.getItem(LS_KEY);}catch(e){stored=null;}if(stored==='accepted'){try{gtag('consent','update',{ad_storage:'granted',analytics_storage:'granted'});}catch(e){}window.googletag=window.googletag||{cmd:[]};window.googletag.cmd.push(function(){try{if(googletag.pubads&&googletag.pubads().setRequestNonPersonalizedAds){googletag.pubads().setRequestNonPersonalizedAds(0);}}catch(e){}});loadAdsense();loadGtag();return;}if(stored==='rejected'){return;}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',showBanner);}else{showBanner();}}
+    (function tryDisablePreexistingAdsense(){try{var existing=document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]');if(existing&&!existing.dataset.wystoneDisabled){existing.type=existing.type||'text/plain';existing.dataset.wystoneDisabled='1';}}catch(e){}}());
+    initConsent();window.WystoneConsent={get:function(){try{return localStorage.getItem(LS_KEY);}catch(e){return null;}},accept:function(){grantConsent();closeBanner();},reject:function(){denyConsent();closeBanner();}};})();
+  </script>
+
+  <!-- AdSense (disabled until user consents) -->
+  <script type="text/plain" data-wystone-disabled="1" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6236637117709087" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- Skip to Content (Accessibility) -->
@@ -192,6 +223,11 @@
             <div class="sidebar__progress-fill" id="progress-fill" style="width: 0%"></div>
           </div>
         </div>
+        <nav class="sidebar__footer-nav" aria-label="Footer navigation">
+          <a href="/about" class="sidebar__footer-link">About</a>
+          <a href="/privacy-policy" class="sidebar__footer-link">Privacy</a>
+          <a href="/terms" class="sidebar__footer-link">Terms</a>
+        </nav>
       </div>
     </aside>
 
@@ -243,11 +279,22 @@
       <!-- Content -->
       <div class="content" id="content-area">
         <div class="content__inner" id="content-inner">
-          <!-- Content rendered here by JS -->
-          <div style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:1rem">
-            <div style="font-size:3rem" class="animate-float" aria-hidden="true">🐳</div>
-            <div style="font-family:var(--font-display);color:var(--accent-cyan);font-size:1.5rem">Loading Docker Learning Hub...</div>
-          </div>
+            <!-- Static SEO snapshot (visible to crawlers; hidden when JS runs) -->
+            <div id="seo-static-content" style="max-width:900px;margin:2rem auto;padding:1.5rem;background:var(--bg-primary);border:1px solid var(--border-subtle);border-radius:8px;box-shadow:var(--shadow-sm);">
+              <h1 style="font-family:var(--font-display);font-size:1.75rem;margin-bottom:0.5rem;color:var(--text-primary);">Docker Learning Hub — Learn Docker from first principles</h1>
+              <p style="color:var(--text-secondary);margin-bottom:0.75rem;">Docker Learning Hub offers a structured, practical introduction to Docker and containerization. This site explains what containers are, how Docker works, and how to build, run, and deploy containerized applications with real-world examples and recommended best practices.</p>
+              <p style="color:var(--text-secondary);margin-bottom:0.75rem;">Browse beginner-friendly lessons, step-by-step guides, system design notes, and a glossary of common terms. Content is organized into learning levels and practical guides so you can progress from simple exercises to production-ready workflows.</p>
+              <p style="color:var(--text-secondary);margin-bottom:0.75rem;">This resource is free to use. Interactive examples and enhanced UI load when JavaScript runs — crawlers and users without JavaScript will still see this static summary. See <a href="/about">About</a>, <a href="/privacy-policy">Privacy Policy</a>, and <a href="/terms">Terms</a> for more information.</p>
+              <p style="color:var(--text-secondary);font-size:0.95rem;margin-top:0.5rem;">Key topics include images & containers, Dockerfiles, Compose, volumes, networking, and deployment patterns for development and production.</p>
+            </div>
+
+            <script>try{document.getElementById('seo-static-content').style.display='none'}catch(e){}</script>
+
+            <!-- Content rendered here by JS -->
+            <div style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:1rem">
+              <div style="font-size:3rem" class="animate-float" aria-hidden="true">🐳</div>
+              <div style="font-family:var(--font-display);color:var(--accent-cyan);font-size:1.5rem">Loading Docker Learning Hub...</div>
+            </div>
         </div>
       </div>
     </main>

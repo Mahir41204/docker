@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Docker Learning Hub</title>
+  <meta name="description" content="Learn about Docker Learning Hub, a free community resource for mastering Docker and containerization from beginner to production.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="About — Docker Learning Hub">
+  <meta property="og:description" content="Learn about Docker Learning Hub, a free community resource for mastering Docker and containerization.">
+  <meta property="og:image" content="https://docker.wystone.tech/favicon-512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://docker.wystone.tech/about">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://docker.wystone.tech/about">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+  <link rel="apple-touch-icon" href="/favicon-192.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <style>
+    /* CSS Custom Properties */
+    :root {
+      --bg-void: #f8fafc;
+      --bg-primary: #ffffff;
+      --bg-secondary: #fafafa;
+      --bg-card: #ffffff;
+      --bg-elevated: #f1f5f9;
+      --bg-hover: #e2e8f0;
+      
+      --accent-cyan: #0070f3;
+      --accent-cyan-dim: #0051b3;
+      --docker-blue: #2496ed;
+      
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #9ca3af;
+      --text-inverse: #ffffff;
+      
+      --border-subtle: #e5e7eb;
+      --border-medium: #d1d5db;
+      --border-accent: rgba(0, 112, 243, 0.3);
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-glow-cyan: 0 0 20px rgba(0, 112, 243, 0.2);
+      
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-body: 'Work Sans', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+      
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      
+      --transition-base: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-void: #0f172a;
+        --bg-primary: #1a202c;
+        --bg-secondary: #1f2937;
+        --bg-card: #1f2937;
+        --bg-elevated: #2d3748;
+        --bg-hover: #4a5568;
+        
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --text-inverse: #111827;
+      }
+    }
+
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      height: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-void);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    a:hover {
+      color: var(--accent-cyan-dim);
+      text-decoration: underline;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--space-lg) var(--space-xl);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header__container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+    }
+
+    .header__logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--docker-blue), var(--accent-cyan));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-glow-cyan);
+    }
+
+    .header__logo-text {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .header__nav {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .header__nav-link {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: color var(--transition-base);
+    }
+
+    .header__nav-link:hover {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-xl);
+      flex: 1;
+    }
+
+    .page-header {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .page-header__title {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      background: linear-gradient(135deg, var(--accent-cyan), var(--docker-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header__subtitle {
+      color: var(--text-secondary);
+      font-size: var(--text-lg);
+    }
+
+    /* Section Styles */
+    .section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .section__title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      color: var(--text-primary);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--border-accent);
+    }
+
+    .section__subtitle {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-md);
+      color: var(--text-primary);
+    }
+
+    .section__content {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .section__content p {
+      margin-bottom: var(--space-md);
+    }
+
+    .section__content ul,
+    .section__content ol {
+      margin-left: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .section__content li {
+      margin-bottom: var(--space-sm);
+    }
+
+    .section__content strong {
+      color: var(--text-primary);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: var(--bg-elevated);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+
+    .highlight-box__title {
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-bottom: var(--space-sm);
+    }
+
+    .highlight-box__content {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+    }
+
+    .card:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card__icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .card__title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+      color: var(--text-primary);
+    }
+
+    .card__description {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      line-height: 1.6;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-2xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-section__title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      color: var(--text-primary);
+    }
+
+    .contact-section__content {
+      color: var(--text-secondary);
+    }
+
+    .contact-section__email {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      word-break: break-all;
+      font-weight: 600;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+      margin-top: var(--space-lg);
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: all var(--transition-base);
+    }
+
+    .social-link:hover {
+      background: var(--bg-hover);
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    .social-link__icon {
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+      padding: var(--space-lg) var(--space-xl);
+      margin-top: auto;
+    }
+
+    .footer__container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+
+    .footer__text {
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .footer__links {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .footer__link {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: color var(--transition-base);
+    }
+
+    .footer__link:hover {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--space-lg) var(--space-md);
+      }
+
+      .header__container {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .header__nav {
+        flex-direction: column;
+        gap: var(--space-md);
+        width: 100%;
+      }
+
+      .header__nav-link {
+        width: 100%;
+        text-align: center;
+      }
+
+      .page-header__title {
+        font-size: var(--text-2xl);
+      }
+
+      .section__title {
+        font-size: var(--text-xl);
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .social-links {
+        flex-direction: column;
+      }
+
+      .social-link {
+        width: 100%;
+      }
+
+      .footer__container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer__links {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+    }
+
+    /* Skip to Content Link */
+    .skip-to-content {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent-cyan);
+      color: var(--text-inverse);
+      padding: 8px;
+      z-index: 100;
+      text-decoration: none;
+      border-radius: var(--radius-md);
+    }
+
+    .skip-to-content:focus {
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to Content (Accessibility) -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__container">
+      <a href="/" class="header__logo">
+        <div class="header__logo-icon">🐳</div>
+        <div class="header__logo-text">Docker Hub</div>
+      </a>
+      <nav class="header__nav">
+        <a href="/" class="header__nav-link">Learning Platform</a>
+        <a href="/about" class="header__nav-link">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="container">
+    <div class="page-header">
+      <h1 class="page-header__title">About Docker Learning Hub</h1>
+      <p class="page-header__subtitle">A free community resource for learning Docker</p>
+    </div>
+
+    <!-- What is This Section -->
+    <section class="section">
+      <h2 class="section__title">What is Docker Learning Hub?</h2>
+      <div class="section__content">
+        <p>Docker Learning Hub is a <strong>free, structured learning platform</strong> dedicated to teaching Docker and containerization. Whether you're completely new to containers or looking to master production-level deployments, this site provides comprehensive, practical guidance.</p>
+
+        <p>We believe containerization shouldn't be complicated. That's why we've built this resource to explain Docker concepts in plain language, break down complex topics into digestible pieces, and provide real-world examples you can learn from immediately.</p>
+
+        <p>This is <strong>not</strong> a corporate training platform or a certification prep course. It's a genuine educational resource built by developers who wanted better learning materials to exist.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">🎯 Our Mission</div>
+          <div class="highlight-box__content">
+            Make Docker accessible to everyone — from beginners taking their first steps to experienced engineers deploying at scale. Free. No paywalls. No prerequisites. Just clear, practical knowledge.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who It's For Section -->
+    <section class="section">
+      <h2 class="section__title">Who is This For?</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card__icon">🚀</div>
+          <div class="card__title">Beginners</div>
+          <div class="card__description">
+            New to containers? Start here. We explain what Docker is, why it matters, and how to run your first container — step by step.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">📚</div>
+          <div class="card__title">Developers</div>
+          <div class="card__description">
+            Build and run applications in containers. Learn best practices, debugging, multi-container setups with Docker Compose, and real-world deployment patterns.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">⚙️</div>
+          <div class="card__title">DevOps & Platform Teams</div>
+          <div class="card__description">
+            Deep dive into system design, orchestration concepts, production deployment strategies, and architectural patterns that scale.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">🎓</div>
+          <div class="card__title">Educators</div>
+          <div class="card__description">
+            Need teaching materials? Use this as a resource for students. Everything is structured, beginner-friendly, and designed for learning.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">🔍</div>
+          <div class="card__title">Curious Minds</div>
+          <div class="card__description">
+            Just want to understand how containerization works? Explore at your own pace. We cover theory, diagrams, and implementation details.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">🌍</div>
+          <div class="card__title">Global Audience</div>
+          <div class="card__description">
+            Available worldwide with no geographic restrictions. Free to access, free to learn. Period.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What You'll Learn Section -->
+    <section class="section">
+      <h2 class="section__title">What You'll Learn</h2>
+      <div class="section__content">
+        <div class="section__subtitle">Beginner Level</div>
+        <ul>
+          <li>What containerization is and why it matters</li>
+          <li>Docker fundamentals: images, containers, registries</li>
+          <li>Running, managing, and troubleshooting containers</li>
+          <li>Building your own images with Dockerfiles</li>
+        </ul>
+
+        <div class="section__subtitle">Intermediate Level</div>
+        <ul>
+          <li>Docker best practices and security</li>
+          <li>Multi-container applications with Docker Compose</li>
+          <li>Networking, volumes, and data persistence</li>
+          <li>Environment configuration and secrets management</li>
+        </ul>
+
+        <div class="section__subtitle">Advanced Level</div>
+        <ul>
+          <li>System design and architecture patterns</li>
+          <li>Production deployment strategies</li>
+          <li>Integration with CI/CD pipelines</li>
+          <li>Performance optimization and troubleshooting</li>
+          <li>Common mistakes and how to avoid them</li>
+        </ul>
+
+        <div class="section__subtitle">Supplementary Content</div>
+        <ul>
+          <li>Quick reference guides and cheat sheets</li>
+          <li>Real-world implementation examples</li>
+          <li>Docker ecosystem tools and integrations</li>
+          <li>Glossary of terms and concepts</li>
+          <li>Curated external resources</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Free Community Resource Section -->
+    <section class="section">
+      <h2 class="section__title">A Free Community Resource</h2>
+      <div class="section__content">
+        <p>Docker Learning Hub is 100% free. There are no premium features, no paywalls, no hidden subscriptions. Access everything from day one.</p>
+
+        <p>This resource is maintained as a community contribution. We believe quality learning materials should be freely available to anyone who wants to improve their skills, regardless of their background or financial situation.</p>
+
+        <p>We're also transparent about how the site is funded: a small amount of ad revenue helps cover hosting costs. That's it. No tracking beyond what's necessary, no data sales, no corporate agendas.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">💡 This Site's Philosophy</div>
+          <div class="highlight-box__content">
+            Learning should be free, accessible, and focus on genuine understanding — not certification chasing or resume padding. We've built this site to be a resource we'd want to use ourselves.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+      <h2 class="contact-section__title">Get in Touch</h2>
+      <div class="contact-section__content">
+        <p>Have questions? Found an issue with the content? Want to provide feedback or suggest improvements? We'd love to hear from you.</p>
+
+        <p style="margin-top: var(--space-lg); margin-bottom: var(--space-md);">
+          <strong>Email:</strong> <span class="contact-section__email">roko14865@gmail.com</span>
+        </p>
+        <p style="margin-top: var(--space-sm); color: var(--text-muted);">
+          Note: Ads on this site are provided by Google AdSense and are loaded only after you accept the cookie-consent banner. You can change your choice via the banner or by clearing your browser storage.
+        </p>
+        <p>We aim to respond to all emails within a few business days.</p>
+
+        <h3 style="font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; margin-top: var(--space-lg); margin-bottom: var(--space-md); color: var(--text-primary);">Connect</h3>
+        <div class="social-links">
+          <a href="https://www.github.com/Mahir41204" target="_blank" rel="noopener noreferrer" class="social-link">
+            <span class="social-link__icon">🔗</span>
+            <span>GitHub</span>
+          </a>
+          <a href="/privacy-policy" class="social-link">
+            <span class="social-link__icon">📋</span>
+            <span>Privacy Policy</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why We Built This Section -->
+    <section class="section" style="margin-top: var(--space-2xl);">
+      <h2 class="section__title">Why We Built This</h2>
+      <div class="section__content">
+        <p>Docker documentation is thorough and official, but it can be overwhelming when you're just starting out. Online courses often feel like high-pressure sales funnels or assume you already know things you don't.</p>
+
+        <p>We wanted something different: a learning resource that respects your time, explains concepts clearly without jargon, and builds knowledge progressively from basics to advanced topics. A place where you can learn Docker because you want to, not because you feel forced to.</p>
+
+        <p>This site exists because we believe developers deserve access to quality learning materials that don't come with corporate baggage or subscription pressure.</p>
+      </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="section">
+      <h2 class="section__title">Support This Project</h2>
+      <div class="section__content">
+        <p>Docker Learning Hub is free and will always be free. However, if you've found this resource valuable and want to support its continued development, here are some ways you can help:</p>
+
+        <div class="section__subtitle">Share the Knowledge</div>
+        <p>Tell a friend, colleague, or student about this resource. Word of mouth is the best way to help this project grow.</p>
+
+        <div class="section__subtitle">Provide Feedback</div>
+        <p>Found something confusing? Spotted an error? Have an idea for a missing topic? <a href="mailto:roko14865@gmail.com">Email us</a> with your suggestions.</p>
+
+        <div class="section__subtitle">Contribute</div>
+        <p>If you're interested in contributing content, reporting bugs, or helping improve the site, check out the GitHub repository (link coming soon).</p>
+
+        <div class="section__subtitle">Spread the Word</div>
+        <p>If this has helped you, consider sharing it on social media or linking to it from your own projects and blogs.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__text">&copy; 2026 Docker Learning Hub. Free learning, no strings attached.</p>
+      <nav class="footer__links">
+        <a href="/" class="footer__link">Home</a>
+        <a href="/about" class="footer__link">About</a>
+        <a href="/privacy-policy" class="footer__link">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

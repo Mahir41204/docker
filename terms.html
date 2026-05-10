@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Docker Learning Hub</title>
+  <meta name="description" content="Terms of Service for Docker Learning Hub. Learn about permitted use, limitations, and our policies.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Terms of Service — Docker Learning Hub">
+  <meta property="og:description" content="Terms of Service for Docker Learning Hub. Learn about permitted use, limitations, and our policies.">
+  <meta property="og:image" content="https://docker.wystone.tech/favicon-512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://docker.wystone.tech/terms">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://docker.wystone.tech/terms">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+  <link rel="apple-touch-icon" href="/favicon-192.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <style>
+    /* CSS Custom Properties */
+    :root {
+      --bg-void: #f8fafc;
+      --bg-primary: #ffffff;
+      --bg-secondary: #fafafa;
+      --bg-card: #ffffff;
+      --bg-elevated: #f1f5f9;
+      --bg-hover: #e2e8f0;
+      
+      --accent-cyan: #0070f3;
+      --accent-cyan-dim: #0051b3;
+      --docker-blue: #2496ed;
+      
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #9ca3af;
+      --text-inverse: #ffffff;
+      
+      --border-subtle: #e5e7eb;
+      --border-medium: #d1d5db;
+      --border-accent: rgba(0, 112, 243, 0.3);
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-glow-cyan: 0 0 20px rgba(0, 112, 243, 0.2);
+      
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-body: 'Work Sans', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+      
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      
+      --transition-base: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-void: #0f172a;
+        --bg-primary: #1a202c;
+        --bg-secondary: #1f2937;
+        --bg-card: #1f2937;
+        --bg-elevated: #2d3748;
+        --bg-hover: #4a5568;
+        
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --text-inverse: #111827;
+      }
+    }
+
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      height: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-void);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    a:hover {
+      color: var(--accent-cyan-dim);
+      text-decoration: underline;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--space-lg) var(--space-xl);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header__container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+    }
+
+    .header__logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--docker-blue), var(--accent-cyan));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-glow-cyan);
+    }
+
+    .header__logo-text {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .header__nav {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .header__nav-link {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: color var(--transition-base);
+    }
+
+    .header__nav-link:hover {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-xl);
+      flex: 1;
+    }
+
+    .page-header {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .page-header__title {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      background: linear-gradient(135deg, var(--accent-cyan), var(--docker-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header__subtitle {
+      color: var(--text-secondary);
+      font-size: var(--text-lg);
+    }
+
+    .page-header__updated {
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      margin-top: var(--space-md);
+    }
+
+    /* Table of Contents */
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toc__title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+      color: var(--accent-cyan);
+    }
+
+    .toc__list {
+      list-style: none;
+    }
+
+    .toc__item {
+      margin-bottom: var(--space-sm);
+    }
+
+    .toc__link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: all var(--transition-base);
+    }
+
+    .toc__link:hover {
+      color: var(--accent-cyan);
+      transform: translateX(4px);
+      text-decoration: none;
+    }
+
+    /* Content Sections */
+    .section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .section__title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      color: var(--text-primary);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--border-accent);
+    }
+
+    .section__subtitle {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-md);
+      color: var(--text-primary);
+    }
+
+    .section__content {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .section__content p {
+      margin-bottom: var(--space-md);
+    }
+
+    .section__content ul,
+    .section__content ol {
+      margin-left: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .section__content li {
+      margin-bottom: var(--space-sm);
+    }
+
+    .section__content strong {
+      color: var(--text-primary);
+    }
+
+    .section__content code {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      color: var(--docker-blue);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: var(--bg-elevated);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+
+    .highlight-box__title {
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-bottom: var(--space-sm);
+    }
+
+    .highlight-box__content {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-top: var(--space-2xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-section__title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+      color: var(--accent-cyan);
+    }
+
+    .contact-section__content {
+      color: var(--text-secondary);
+    }
+
+    .contact-section__email {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      word-break: break-all;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+      padding: var(--space-lg) var(--space-xl);
+      margin-top: auto;
+    }
+
+    .footer__container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+
+    .footer__text {
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .footer__links {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .footer__link {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: color var(--transition-base);
+    }
+
+    .footer__link:hover {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--space-lg) var(--space-md);
+      }
+
+      .header__container {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .header__nav {
+        flex-direction: column;
+        gap: var(--space-md);
+        width: 100%;
+      }
+
+      .header__nav-link {
+        width: 100%;
+        text-align: center;
+      }
+
+      .page-header__title {
+        font-size: var(--text-2xl);
+      }
+
+      .section__title {
+        font-size: var(--text-xl);
+      }
+
+      .footer__container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer__links {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+    }
+
+    /* Skip to Content Link */
+    .skip-to-content {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent-cyan);
+      color: var(--text-inverse);
+      padding: 8px;
+      z-index: 100;
+      text-decoration: none;
+      border-radius: var(--radius-md);
+    }
+
+    .skip-to-content:focus {
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to Content (Accessibility) -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__container">
+      <a href="/" class="header__logo">
+        <div class="header__logo-icon">🐳</div>
+        <div class="header__logo-text">Docker Hub</div>
+      </a>
+      <nav class="header__nav">
+        <a href="/" class="header__nav-link">Learning Platform</a>
+        <a href="/about" class="header__nav-link">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="container">
+    <div class="page-header">
+      <h1 class="page-header__title">Terms of Service</h1>
+      <p class="page-header__subtitle">Guidelines for using Docker Learning Hub</p>
+      <p class="page-header__updated">Last updated: May 9, 2026</p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <div class="toc__title">📋 Contents</div>
+      <ul class="toc__list">
+        <li class="toc__item"><a href="#acceptance" class="toc__link"><span>→</span> Acceptance of Terms</a></li>
+        <li class="toc__item"><a href="#permitted-use" class="toc__link"><span>→</span> Permitted Use</a></li>
+        <li class="toc__item"><a href="#prohibited-use" class="toc__link"><span>→</span> Prohibited Use</a></li>
+        <li class="toc__item"><a href="#warranty-disclaimer" class="toc__link"><span>→</span> Warranty Disclaimer</a></li>
+        <li class="toc__item"><a href="#limitation-liability" class="toc__link"><span>→</span> Limitation of Liability</a></li>
+        <li class="toc__item"><a href="#third-party-links" class="toc__link"><span>→</span> Third-Party Links</a></li>
+        <li class="toc__item"><a href="#adsense" class="toc__link"><span>→</span> Google AdSense</a></li>
+        <li class="toc__item"><a href="#governing-law" class="toc__link"><span>→</span> Governing Law</a></li>
+      </ul>
+    </div>
+
+    <!-- Acceptance Section -->
+    <section id="acceptance" class="section">
+      <h2 class="section__title">Acceptance of Terms</h2>
+      <div class="section__content">
+        <p>By accessing and using Docker Learning Hub (available at docker.wystone.tech and its subdomains), you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, you should not use this site.</p>
+
+        <p>We reserve the right to modify these terms at any time. Changes will be posted here with an updated "Last updated" date. Your continued use of the site after any changes constitutes your acceptance of the new terms.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">ℹ️ Important</div>
+          <div class="highlight-box__content">
+            These terms are binding. By using this site, you enter into a legal agreement with us. If you're under 13 years old, you should have your parent or guardian read and accept these terms on your behalf.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Permitted Use Section -->
+    <section id="permitted-use" class="section">
+      <h2 class="section__title">Permitted Use</h2>
+      <div class="section__content">
+        <p>You are permitted to use Docker Learning Hub for the following purposes:</p>
+
+        <div class="section__subtitle">✅ What You Can Do</div>
+        <ul>
+          <li><strong>Read content:</strong> View all educational materials on the site</li>
+          <li><strong>Personal reference:</strong> Use the content for your own learning and professional development</li>
+          <li><strong>Bookmark and save:</strong> Store pages in your browser or note-taking tools for personal use</li>
+          <li><strong>Share links:</strong> Point others to the site or specific pages</li>
+          <li><strong>Take notes:</strong> Summarize content in your own words for personal study</li>
+          <li><strong>Apply knowledge:</strong> Use Docker concepts and practices you've learned</li>
+          <li><strong>Offline viewing:</strong> Save pages to your device for personal, offline reference</li>
+          <li><strong>Educational use:</strong> Reference content in your own teaching or educational materials, with proper attribution</li>
+        </ul>
+
+        <p style="margin-top: var(--space-lg);">The content on Docker Learning Hub is provided for educational purposes. You may use it to enhance your understanding of Docker, improve your professional skills, and support your learning journey.</p>
+      </div>
+    </section>
+
+    <!-- Prohibited Use Section -->
+    <section id="prohibited-use" class="section">
+      <h2 class="section__title">Prohibited Use</h2>
+      <div class="section__content">
+        <p>You are strictly prohibited from:</p>
+
+        <div class="section__subtitle">❌ What You Cannot Do</div>
+        <ul>
+          <li><strong>Automatic scraping:</strong> Using bots, scrapers, crawlers, or automated tools to extract content from the site (beyond normal search engine indexing)</li>
+          <li><strong>Republishing without attribution:</strong> Copying entire pages or substantial portions and posting them elsewhere without proper credit</li>
+          <li><strong>Mass downloading:</strong> Systematically downloading the entire site or large portions of it</li>
+          <li><strong>Reverse engineering:</strong> Attempting to reverse-engineer or decompile the site's code</li>
+          <li><strong>Removing attribution:</strong> Altering, removing, or obscuring copyright notices or attribution</li>
+          <li><strong>Commercial redistribution:</strong> Selling, licensing, or charging others for access to the content</li>
+          <li><strong>Claiming ownership:</strong> Representing the content as your own original work</li>
+          <li><strong>Illegal use:</strong> Using the site for any illegal or harmful purposes</li>
+          <li><strong>Unauthorized access:</strong> Attempting to gain unauthorized access to the site or its systems</li>
+          <li><strong>Disruption:</strong> Attempting to interfere with, disrupt, or overwhelm the site's infrastructure</li>
+          <li><strong>Misuse of content:</strong> Modifying content and presenting it as official or endorsed by us</li>
+        </ul>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">⚖️ Attribution Rule</div>
+          <div class="highlight-box__content">
+            If you use significant portions of content from Docker Learning Hub in your own work, blog, course, or project, you must provide clear attribution to docker.wystone.tech with a link back to the original content. This is a matter of intellectual property respect and good faith.
+          </div>
+        </div>
+
+        <div class="section__subtitle" style="margin-top: var(--space-lg);">Consequences</div>
+        <p>We monitor for violations of these terms. If we detect prohibited activities (automated scraping, mass downloading, republishing, etc.), we may:</p>
+        <ul>
+          <li>Block your IP address or user agent</li>
+          <li>Restrict your access to the site</li>
+          <li>Issue legal takedown notices (for copyright violations)</li>
+          <li>Take legal action to protect our intellectual property</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Warranty Disclaimer Section -->
+    <section id="warranty-disclaimer" class="section">
+      <h2 class="section__title">Disclaimer of Warranties</h2>
+      <div class="section__content">
+        <p>Docker Learning Hub provides its educational content "as-is" without any guarantees or warranties. Here's what that means:</p>
+
+        <div class="section__subtitle">📝 Content Disclaimer</div>
+        <p><strong>We make no warranty about the accuracy, completeness, or reliability of the content.</strong> While we strive to provide accurate information and keep content current, Docker evolves rapidly, and information can become outdated. Always verify critical information with official Docker documentation or in a testing environment.</p>
+
+        <div class="section__subtitle">🔧 No Technical Support Guarantee</div>
+        <p>We do not guarantee that the site will be error-free, uninterrupted, or that your use will be uninterrupted or secure. While we aim for high availability, the site may experience downtime for maintenance or other reasons.</p>
+
+        <div class="section__subtitle">⚠️ Use at Your Own Risk</div>
+        <p>You use Docker Learning Hub entirely at your own risk. Any actions you take based on information from this site are your responsibility. Test everything in a development environment before using it in production.</p>
+
+        <div class="section__subtitle">🚫 No Professional Advice</div>
+        <p>Content on Docker Learning Hub is educational material, not professional advice. It should not be treated as a substitute for professional consulting, enterprise support, or expert guidance for your specific situation. Consult qualified professionals for critical infrastructure decisions.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">🛡️ Important Caveat</div>
+          <div class="highlight-box__content">
+            While we believe the content is helpful and accurate to the best of our knowledge, we cannot guarantee its correctness for every scenario or environment. Always test thoroughly in your own context before deploying to production systems.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Limitation of Liability Section -->
+    <section id="limitation-liability" class="section">
+      <h2 class="section__title">Limitation of Liability</h2>
+      <div class="section__content">
+        <p>To the fullest extent permitted by law, Docker Learning Hub and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from:</p>
+
+        <ul>
+          <li>Your use or inability to use the site</li>
+          <li>Information or content provided on the site</li>
+          <li>Loss of data or business interruption</li>
+          <li>Errors, inaccuracies, or omissions in content</li>
+          <li>Actions taken based on information from the site</li>
+          <li>Third-party links or external websites</li>
+          <li>Any unauthorized access or alteration of your data</li>
+        </ul>
+
+        <p style="margin-top: var(--space-lg);"><strong>Our total liability to you for any claim is limited to the amount you paid to access the site (which is zero, since the site is free).</strong> Some jurisdictions do not allow limitation of liability, so this may not apply to you.</p>
+
+        <p>This limitation applies regardless of whether the claim is based on contract, tort, strict liability, or any other legal theory, and whether or not we have been advised of the possibility of such damage.</p>
+      </div>
+    </section>
+
+    <!-- Third-Party Links Section -->
+    <section id="third-party-links" class="section">
+      <h2 class="section__title">Third-Party Links & External Content</h2>
+      <div class="section__content">
+        <p>Docker Learning Hub may contain links to external websites, resources, and third-party content. These include links to:</p>
+
+        <ul>
+          <li>Official Docker documentation</li>
+          <li>Related tools and services</li>
+          <li>Educational resources and tutorials</li>
+          <li>GitHub repositories</li>
+          <li>Community forums and discussions</li>
+        </ul>
+
+        <div class="section__subtitle">Our Responsibility</div>
+        <p>We are <strong>not responsible</strong> for the content, accuracy, or practices of any external websites or third-party services. We do not endorse third-party content, even when we link to it. When you click a link to an external site, you leave Docker Learning Hub and are subject to that site's terms, privacy policies, and practices.</p>
+
+        <div class="section__subtitle">Your Responsibility</div>
+        <p>You are responsible for evaluating the accuracy and appropriateness of any third-party content. We recommend reviewing the privacy policies and terms of any external sites you visit.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">🔗 External Resources</div>
+          <div class="highlight-box__content">
+            Links are provided for convenience and educational purposes only. We do not monitor third-party sites for changes, errors, or policy updates, and we are not liable for any issues arising from external content.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Google AdSense Section -->
+    <section id="adsense" class="section">
+      <h2 class="section__title">Google AdSense & Advertising</h2>
+      <div class="section__content">
+        <p>Docker Learning Hub displays advertisements through Google AdSense to help support the free educational content on this site.</p>
+
+        <div class="section__subtitle">How It Works</div>
+        <ul>
+          <li>Google AdSense displays contextual ads based on page content</li>
+          <li>Google may use cookies to serve personalized ads</li>
+          <li>You can control your ad preferences through <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google Ads Settings</a></li>
+          <li>Ad revenue helps us cover hosting and maintenance costs</li>
+        </ul>
+
+        <p><strong>Consent:</strong> To comply with applicable privacy regulations, Google AdSense and related advertising scripts are not loaded until you grant consent using the site's cookie-consent banner. If you decline, advertising scripts remain disabled.</p>
+
+        <div class="section__subtitle">Google's Policies</div>
+        <p>By using this site, you acknowledge that:</p>
+        <ul>
+          <li>We are subject to <a href="https://www.google.com/adsense/new/tos" target="_blank" rel="noopener noreferrer">Google AdSense Terms of Service</a></li>
+          <li>Google may collect data as described in their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></li>
+          <li>Ad serving is controlled by Google, not by Docker Learning Hub</li>
+        </ul>
+
+        <div class="section__subtitle">Ad-Free Experience</div>
+        <p>You can use browser extensions or tools to block ads if you choose. We respect your choice, though ad revenue helps us maintain the site.</p>
+
+        <p style="margin-top: var(--space-lg);">We are not responsible for the content of advertisements served by Google AdSense. If you find an ad problematic or misleading, you can report it to Google.</p>
+      </div>
+    </section>
+
+    <!-- Governing Law Section -->
+    <section id="governing-law" class="section">
+      <h2 class="section__title">Governing Law & Jurisdiction</h2>
+      <div class="section__content">
+        <p>These Terms of Service are governed by and construed in accordance with the laws of the jurisdiction in which Docker Learning Hub operates, without regard to its conflict of law principles.</p>
+
+        <p>By using this site, you agree to submit to the exclusive jurisdiction of the courts in that jurisdiction for any disputes arising from or relating to these terms or your use of the site.</p>
+
+        <div class="section__subtitle">Dispute Resolution</div>
+        <p>In the event of any dispute, we encourage you to contact us first at <span style="font-family: var(--font-mono); color: var(--accent-cyan);">roko14865@gmail.com</span> to attempt to resolve the issue informally before pursuing legal action.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">⚖️ Legal Matters</div>
+          <div class="highlight-box__content">
+            These are the governing legal terms for your use of Docker Learning Hub. If any provision is found to be unenforceable, the remaining provisions will continue in effect. If you have legal questions, consult with a qualified attorney.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Terms Section -->
+    <section class="section">
+      <h2 class="section__title">Additional Terms</h2>
+      <div class="section__content">
+        <div class="section__subtitle">Intellectual Property</div>
+        <p>The content on Docker Learning Hub, including but not limited to text, diagrams, code examples, and graphics, is the intellectual property of Docker Learning Hub or its contributors. Docker itself is a trademark of Docker Inc. We are not affiliated with Docker Inc. except as an educational resource.</p>
+
+        <div class="section__subtitle">License Grant</div>
+        <p>We grant you a limited, non-exclusive, non-transferable license to access and use this site for educational purposes, subject to these terms. This license does not include the right to download or republish content except as expressly permitted above.</p>
+
+        <div class="section__subtitle">Termination</div>
+        <p>We may terminate or restrict your access to the site at any time, for any reason, with or without notice, if we believe you are violating these terms or using the site in a harmful manner.</p>
+
+        <div class="section__subtitle">Entire Agreement</div>
+        <p>These Terms of Service, together with our Privacy Policy, constitute the entire agreement between you and Docker Learning Hub regarding your use of the site. These terms supersede all prior and contemporaneous agreements, understandings, and representations.</p>
+
+        <div class="section__subtitle">Severability</div>
+        <p>If any provision of these terms is found to be invalid or unenforceable, that provision will be modified to the minimum extent necessary to make it valid, or if that's not possible, it will be severed, and the remaining provisions will remain in effect.</p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+      <div class="contact-section__title">Questions About These Terms?</div>
+      <div class="contact-section__content">
+        <p>If you have questions, concerns, or need clarification about these Terms of Service, please contact us:</p>
+        
+        <p style="margin-top: var(--space-lg);">
+          <strong>Email:</strong> <span class="contact-section__email">roko14865@gmail.com</span>
+        </p>
+
+        <p style="margin-top: var(--space-md);">
+          We'll do our best to respond within 5 business days.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__text">&copy; 2026 Docker Learning Hub. All rights reserved.</p>
+      <nav class="footer__links">
+        <a href="/" class="footer__link">Home</a>
+        <a href="/about" class="footer__link">About</a>
+        <a href="/terms" class="footer__link">Terms</a>
+        <a href="/privacy-policy" class="footer__link">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Docker Learning Hub</title>
+  <meta name="description" content="Privacy Policy for Docker Learning Hub. Learn how we collect, use, and protect your data.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Privacy Policy — Docker Learning Hub">
+  <meta property="og:description" content="Privacy Policy for Docker Learning Hub. Learn how we collect, use, and protect your data.">
+  <meta property="og:image" content="https://docker.wystone.tech/favicon-512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://docker.wystone.tech/privacy-policy">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://docker.wystone.tech/privacy-policy">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+  <link rel="apple-touch-icon" href="/favicon-192.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <style>
+    /* CSS Custom Properties */
+    :root {
+      --bg-void: #f8fafc;
+      --bg-primary: #ffffff;
+      --bg-secondary: #fafafa;
+      --bg-card: #ffffff;
+      --bg-elevated: #f1f5f9;
+      --bg-hover: #e2e8f0;
+      
+      --accent-cyan: #0070f3;
+      --accent-cyan-dim: #0051b3;
+      --docker-blue: #2496ed;
+      
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #9ca3af;
+      --text-inverse: #ffffff;
+      
+      --border-subtle: #e5e7eb;
+      --border-medium: #d1d5db;
+      --border-accent: rgba(0, 112, 243, 0.3);
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-glow-cyan: 0 0 20px rgba(0, 112, 243, 0.2);
+      
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-body: 'Work Sans', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+      
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      
+      --transition-base: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-void: #0f172a;
+        --bg-primary: #1a202c;
+        --bg-secondary: #1f2937;
+        --bg-card: #1f2937;
+        --bg-elevated: #2d3748;
+        --bg-hover: #4a5568;
+        
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --text-inverse: #111827;
+      }
+    }
+
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      height: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-void);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    a:hover {
+      color: var(--accent-cyan-dim);
+      text-decoration: underline;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--space-lg) var(--space-xl);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header__container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+    }
+
+    .header__logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--docker-blue), var(--accent-cyan));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-glow-cyan);
+    }
+
+    .header__logo-text {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .header__nav {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .header__nav-link {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: color var(--transition-base);
+    }
+
+    .header__nav-link:hover {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-xl);
+      flex: 1;
+    }
+
+    .page-header {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .page-header__title {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      background: linear-gradient(135deg, var(--accent-cyan), var(--docker-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header__subtitle {
+      color: var(--text-secondary);
+      font-size: var(--text-lg);
+    }
+
+    .page-header__updated {
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      margin-top: var(--space-md);
+    }
+
+    /* Table of Contents */
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toc__title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+      color: var(--accent-cyan);
+    }
+
+    .toc__list {
+      list-style: none;
+    }
+
+    .toc__item {
+      margin-bottom: var(--space-sm);
+    }
+
+    .toc__link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: all var(--transition-base);
+    }
+
+    .toc__link:hover {
+      color: var(--accent-cyan);
+      transform: translateX(4px);
+      text-decoration: none;
+    }
+
+    /* Content Sections */
+    .section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .section__title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      color: var(--text-primary);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--border-accent);
+    }
+
+    .section__subtitle {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-md);
+      color: var(--text-primary);
+    }
+
+    .section__content {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .section__content p {
+      margin-bottom: var(--space-md);
+    }
+
+    .section__content ul,
+    .section__content ol {
+      margin-left: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .section__content li {
+      margin-bottom: var(--space-sm);
+    }
+
+    .section__content strong {
+      color: var(--text-primary);
+    }
+
+    .section__content code {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      color: var(--docker-blue);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: var(--bg-elevated);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+
+    .highlight-box__title {
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-bottom: var(--space-sm);
+    }
+
+    .highlight-box__content {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-top: var(--space-2xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-section__title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+      color: var(--accent-cyan);
+    }
+
+    .contact-section__content {
+      color: var(--text-secondary);
+    }
+
+    .contact-section__email {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      word-break: break-all;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+      padding: var(--space-lg) var(--space-xl);
+      margin-top: auto;
+    }
+
+    .footer__container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+
+    .footer__text {
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .footer__links {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .footer__link {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      transition: color var(--transition-base);
+    }
+
+    .footer__link:hover {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--space-lg) var(--space-md);
+      }
+
+      .header__container {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .header__nav {
+        flex-direction: column;
+        gap: var(--space-md);
+        width: 100%;
+      }
+
+      .header__nav-link {
+        width: 100%;
+        text-align: center;
+      }
+
+      .page-header__title {
+        font-size: var(--text-2xl);
+      }
+
+      .section__title {
+        font-size: var(--text-xl);
+      }
+
+      .footer__container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer__links {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+    }
+
+    /* Skip to Content Link */
+    .skip-to-content {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent-cyan);
+      color: var(--text-inverse);
+      padding: 8px;
+      z-index: 100;
+      text-decoration: none;
+      border-radius: var(--radius-md);
+    }
+
+    .skip-to-content:focus {
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to Content (Accessibility) -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__container">
+      <a href="/" class="header__logo">
+        <div class="header__logo-icon">🐳</div>
+        <div class="header__logo-text">Docker Hub</div>
+      </a>
+      <nav class="header__nav">
+        <a href="/" class="header__nav-link">Learning Platform</a>
+        <a href="/about" class="header__nav-link">About</a>
+        <a href="/terms" class="header__nav-link">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="container">
+    <div class="page-header">
+      <h1 class="page-header__title">Privacy Policy</h1>
+      <p class="page-header__subtitle">How we protect your privacy at Docker Learning Hub</p>
+      <p class="page-header__updated">Last updated: May 9, 2026</p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <div class="toc__title">📋 Contents</div>
+      <ul class="toc__list">
+        <li class="toc__item"><a href="#overview" class="toc__link"><span>→</span> Overview</a></li>
+        <li class="toc__item"><a href="#data-collection" class="toc__link"><span>→</span> What Data We Collect</a></li>
+        <li class="toc__item"><a href="#how-we-use" class="toc__link"><span>→</span> How We Use Your Data</a></li>
+        <li class="toc__item"><a href="#third-party" class="toc__link"><span>→</span> Third-Party Services</a></li>
+        <li class="toc__item"><a href="#cookies" class="toc__link"><span>→</span> Cookies & Tracking</a></li>
+        <li class="toc__item"><a href="#gdpr" class="toc__link"><span>→</span> Your Rights (GDPR)</a></li>
+        <li class="toc__item"><a href="#contact" class="toc__link"><span>→</span> Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section">
+      <h2 class="section__title">Overview</h2>
+      <div class="section__content">
+        <p>Docker Learning Hub (available at docker.wystone.tech) is a free, educational platform dedicated to teaching Docker and containerization. This privacy policy explains what information we collect, how we use it, and your rights regarding your data.</p>
+        
+        <p>We are committed to protecting your privacy. Our site does not require user accounts, does not collect personal information through forms, and does not process any purchases. We are transparent about what minimal data we collect and why.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">Key Points</div>
+          <div class="highlight-box__content">
+            No user accounts • No form submissions • No purchases • No personal data collection • Educational content only
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Collection Section -->
+    <section id="data-collection" class="section">
+      <h2 class="section__title">What Data We Collect</h2>
+      <div class="section__content">
+        <p>When you visit Docker Learning Hub, we collect only the following:</p>
+
+        <div class="section__subtitle">1. IP Address</div>
+        <p>Your IP address is automatically recorded by our CDN provider (Cloudflare) and web server. This information is used for:</p>
+        <ul>
+          <li>Detecting and preventing abuse or attacks</li>
+          <li>Approximate location identification (country/region level only)</li>
+          <li>Basic traffic statistics</li>
+        </ul>
+
+        <p><strong>We do not store your IP address for marketing or tracking purposes.</strong></p>
+
+        <div class="section__subtitle">2. Usage Analytics</div>
+        <p>We use Google Analytics 4 to understand how visitors use the site. The Google Analytics Measurement ID is <strong>G-BMPGZRMLCK</strong>. The analytics script is only loaded after you explicitly accept analytics in the site cookie banner; declining prevents the analytics script from loading. Cloudflare may also collect limited traffic data as part of its CDN and security services (see below for details).</p>
+
+        <p>Note: Google AdSense is used only to serve ads and is not loaded until you explicitly accept the cookie-consent banner shown on first visit. Your consent choice is stored locally (localStorage key <code>wystone_cookie_consent</code>) and can be changed by clearing your browser storage or using the site banner.</p>
+
+        <div class="section__subtitle">3. Cookies</div>
+        <p>Our site uses cookies from:</p>
+        <ul>
+          <li><strong>Cloudflare:</strong> Essential cookies for security and performance</li>
+          <li><strong>Google AdSense:</strong> Cookies for ad personalization and serving</li>
+        </ul>
+
+        <p>We do not set our own tracking cookies.</p>
+
+        <div class="section__subtitle">4. No Personal Information Collected</div>
+        <p>We do <strong>not</strong> collect:</p>
+        <ul>
+          <li>Names or email addresses</li>
+          <li>Phone numbers</li>
+          <li>Precise location data</li>
+          <li>Payment or billing information</li>
+          <li>Passwords or login credentials</li>
+          <li>Any data through forms</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- How We Use Data Section -->
+    <section id="how-we-use" class="section">
+      <h2 class="section__title">How We Use Your Data</h2>
+      <div class="section__content">
+        <p>The limited data we collect is used only for:</p>
+
+        <div class="section__subtitle">Performance & Security</div>
+        <ul>
+          <li>Ensuring the site runs smoothly for all users</li>
+          <li>Protecting against attacks and abuse</li>
+          <li>Detecting and fixing technical problems</li>
+          <li>Monitoring server uptime and performance</li>
+        </ul>
+
+        <div class="section__subtitle">Understanding Usage</div>
+        <ul>
+          <li>Analyzing which learning topics are most popular</li>
+          <li>Identifying which pages need improvement</li>
+          <li>Understanding user behavior patterns at an aggregate level</li>
+          <li>Making data-driven decisions about content</li>
+        </ul>
+
+        <div class="section__subtitle">Advertising</div>
+        <ul>
+          <li>Serving relevant ads through Google AdSense</li>
+          <li>Measuring ad performance</li>
+          <li>Generating revenue to support free content</li>
+        </ul>
+
+        <p><strong>We do not sell or share your data with third parties for marketing purposes.</strong></p>
+      </div>
+    </section>
+
+    <!-- Third-Party Services Section -->
+    <section id="third-party" class="section">
+      <h2 class="section__title">Third-Party Services</h2>
+      <div class="section__content">
+        <p>Our site uses the following third-party services that may collect data:</p>
+
+        <div class="section__subtitle">🌐 Cloudflare</div>
+        <p><strong>What it does:</strong> Cloudflare is our Content Delivery Network (CDN) and provides DDoS protection and security features.</p>
+        <p><strong>Data collected:</strong> IP address, connection information, request metadata</p>
+        <p><strong>Privacy Policy:</strong> <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare Privacy Policy</a></p>
+
+        <div class="section__subtitle"> Google AdSense</div>
+        <p><strong>What it does:</strong> Google AdSense serves contextual advertisements on our site.</p>
+        <p><strong>Data collected:</strong> Your interests, browsing behavior (across participating websites), ad interaction</p>
+        <p><strong>Purpose:</strong> Showing relevant ads and generating revenue</p>
+        <p><strong>Privacy Policy:</strong> <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a></p>
+        <p><strong>Opt out:</strong> Visit <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google Ads Settings</a></p>
+        <p><strong>Consent & Loading:</strong> For GDPR compliance, we do not load Google AdSense or related advertising scripts until you grant consent via the site's cookie-consent banner. If you decline, advertising scripts remain unloaded and only essential Cloudflare cookies are used.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">ℹ️ Important Note</div>
+          <div class="highlight-box__content">
+            We are not responsible for the privacy practices of third-party services. We encourage you to review their privacy policies directly. You can control third-party tracking through your browser settings.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cookies Section -->
+    <section id="cookies" class="section">
+      <h2 class="section__title">Cookies & Tracking Technologies</h2>
+      <div class="section__content">
+        <p>A cookie is a small file stored on your device that helps websites remember information about you.</p>
+
+        <div class="section__subtitle">Types of Cookies We Use</div>
+
+        <div class="section__subtitle">Essential Cookies (Required)</div>
+        <ul>
+          <li><strong>Cloudflare cookies:</strong> Required for security and DDoS protection. Cannot be disabled without affecting site access.</li>
+          <li><strong>Session cookies:</strong> Help maintain your session while browsing</li>
+        </ul>
+
+        <div class="section__subtitle">Advertising Cookies (Optional)</div>
+        <ul>
+          <li><strong>Google AdSense cookies:</strong> Enable personalized ads and ad performance tracking</li>
+        </ul>
+
+        <div class="section__subtitle">Managing Cookies</div>
+        <p>You can control cookies in your browser:</p>
+        <ul>
+          <li><strong>Chrome:</strong> Settings → Privacy and security → Cookies and other site data</li>
+          <li><strong>Firefox:</strong> Preferences → Privacy & Security → Cookies and Site Data</li>
+          <li><strong>Safari:</strong> Preferences → Privacy → Cookies and website data</li>
+          <li><strong>Edge:</strong> Settings → Privacy, search, and services → Clear browsing data</li>
+        </ul>
+
+        <p>Disabling non-essential cookies will not affect the core functionality of our site, though analytics and ads may not work properly.</p>
+
+        <p><strong>Site cookie banner:</strong> On first visit you will see a cookie-consent banner allowing you to Accept or Decline advertising and analytics storage. Accepting enables AdSense and analytics storage; declining prevents those scripts from loading. Your choice is stored locally and respected on future visits.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">⚙️ Do Not Track</div>
+          <div class="highlight-box__content">
+            If you have enabled "Do Not Track" in your browser, we will respect this preference. Cloudflare and Google AdSense may have their own policies regarding this setting.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GDPR Section -->
+    <section id="gdpr" class="section">
+      <h2 class="section__title">Your Rights Under GDPR</h2>
+      <div class="section__content">
+        <p>If you are located in the European Union or European Economic Area, you have specific rights regarding your personal data under the General Data Protection Regulation (GDPR).</p>
+
+        <div class="section__subtitle">Your GDPR Rights</div>
+
+        <div class="section__subtitle">Right to Access</div>
+        <p>You can request a copy of the personal data we hold about you. Since we collect minimal data and don't maintain user accounts, this would primarily include any data held by Google AdSense and Cloudflare.</p>
+
+        <div class="section__subtitle">Right to Rectification</div>
+        <p>You can request correction of inaccurate data. However, since we don't collect direct personal information, this applies mainly to third-party services.</p>
+
+        <div class="section__subtitle">Right to Erasure ("Right to be Forgotten")</div>
+        <p>You can request deletion of your data. Contact us for assistance, though we recommend:</p>
+        <ul>
+          <li>Clear your cookies (which deletes tracking data)</li>
+          <li>Disable JavaScript to prevent third-party tracking</li>
+          <li>Use a VPN to mask your IP address</li>
+        </ul>
+
+        <div class="section__subtitle">Right to Data Portability</div>
+        <p>You can request your data in a portable format. Since most of your data is held by third parties (Google, Cloudflare), contact them directly.</p>
+
+        <div class="section__subtitle">Right to Object</div>
+        <p>You can object to:</p>
+        <ul>
+          <li>Analytics tracking: Opt out via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out</a></li>
+          <li>Personalized ads: Opt out via <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google Ads Settings</a></li>
+          <li>Cloudflare tracking: Use browser privacy settings or contact us</li>
+        </ul>
+
+        <div class="section__subtitle">Right to Restrict Processing</div>
+        <p>You can request that we limit how we use your data. Contact us to discuss options.</p>
+
+        <div class="section__subtitle">How to Exercise Your Rights</div>
+        <p>To exercise any of these rights, please contact us at the email address in the <a href="#contact">Contact section</a> below. We will respond to your request within 30 days (as required by GDPR).</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box__title">🇪🇺 EU Data Protection Officer Contact</div>
+          <div class="highlight-box__content">
+            If you believe we have not properly handled your data request or violated your GDPR rights, you have the right to lodge a complaint with your local data protection authority.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+      <div class="contact-section__title" id="contact">📧 Contact Us</div>
+      <div class="contact-section__content">
+        <p>If you have questions about this privacy policy, wish to exercise your privacy rights, or have concerns about how we handle your data, please contact us:</p>
+        
+        <p style="margin-top: var(--space-lg);">
+          <strong>Email:</strong> <span class="contact-section__email">roko14865@gmail.com</span>
+        </p>
+
+        <p style="margin-top: var(--space-md);">
+          We aim to respond to all privacy inquiries within 5 business days.
+        </p>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <section class="section" style="margin-top: var(--space-2xl);">
+      <h2 class="section__title">Additional Information</h2>
+      <div class="section__content">
+        <div class="section__subtitle">Children's Privacy</div>
+        <p>Docker Learning Hub is not intended for children under 13. We do not knowingly collect data from children under 13. If we become aware of such collection, we will delete it immediately. Parents who believe their child's information has been collected should contact us.</p>
+
+        <div class="section__subtitle">Data Retention</div>
+        <p>We retain data only as long as necessary for the purposes described in this policy. Most analytics data is retained for 14 months. Server logs are typically retained for 30 days.</p>
+
+        <div class="section__subtitle">Security</div>
+        <p>We take reasonable measures to protect data integrity and security, including using HTTPS encryption for all communications. However, no internet transmission is completely secure. We cannot guarantee absolute security.</p>
+
+        <div class="section__subtitle">Changes to This Policy</div>
+        <p>We may update this privacy policy at any time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will post the updated policy here with a new "Last updated" date. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+
+        <div class="section__subtitle">International Data Transfers</div>
+        <p>Our third-party services (Google, Cloudflare) may transfer data internationally, including to the United States. By using our site, you consent to such transfers. Google and Cloudflare maintain appropriate safeguards under data protection agreements.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__text">&copy; 2026 Docker Learning Hub. All rights reserved.</p>
+      <nav class="footer__links">
+        <a href="/" class="footer__link">Home</a>
+        <a href="/privacy-policy" class="footer__link">Privacy Policy</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

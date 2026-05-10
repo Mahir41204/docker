@@ -4,44 +4,31 @@
 // Usage: node scripts/generate-sitemap.js
 // Output: public/sitemap.xml
 
-import { writeFileSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { writeFileSync } from "fs";
+import { resolve, dirname } from "path";
+import { fileURLToPath } from "url";
+import { ROUTES } from "../src/js/routes.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const DOMAIN = 'https://docker-learning-hub.com';
-const TODAY = new Date().toISOString().split('T')[0];
-
-// All routes in the SPA
-const routes = [
-  { path: 'quick-notes',    priority: '0.8', changefreq: 'weekly' },
-  { path: 'overview',       priority: '1.0', changefreq: 'monthly' },
-  { path: 'level-0',        priority: '0.9', changefreq: 'monthly' },
-  { path: 'level-1',        priority: '0.9', changefreq: 'monthly' },
-  { path: 'level-2',        priority: '0.9', changefreq: 'monthly' },
-  { path: 'level-3',        priority: '0.9', changefreq: 'monthly' },
-  { path: 'level-4',        priority: '0.9', changefreq: 'monthly' },
-  { path: 'compose',        priority: '0.8', changefreq: 'monthly' },
-  { path: 'features',       priority: '0.7', changefreq: 'monthly' },
-  { path: 'tools',          priority: '0.7', changefreq: 'monthly' },
-  { path: 'integrations',   priority: '0.7', changefreq: 'monthly' },
-  { path: 'languages',      priority: '0.7', changefreq: 'monthly' },
-  { path: 'implementation', priority: '0.8', changefreq: 'monthly' },
-  { path: 'guides',         priority: '0.8', changefreq: 'weekly' },
-  { path: 'system-design',  priority: '0.8', changefreq: 'monthly' },
-  { path: 'mistakes',       priority: '0.7', changefreq: 'monthly' },
-  { path: 'glossary',       priority: '0.6', changefreq: 'monthly' },
-  { path: 'resources',      priority: '0.6', changefreq: 'monthly' },
-];
+const DOMAIN = "https://docker.wystone.tech";
+const TODAY = new Date().toISOString().split("T")[0];
 
 function generateSitemap() {
-  const urls = routes.map(r => `  <url>
-    <loc>${DOMAIN}/#${r.path}</loc>
+  // Filter out 'overview' to avoid duplication (already hardcoded below as home)
+  const uniqueRoutes = ROUTES.filter(
+    (route) => route.path && route.key !== "overview",
+  );
+  const urls = uniqueRoutes
+    .map(
+      (r) => `  <url>
+    <loc>${DOMAIN}${r.path}</loc>
     <lastmod>${TODAY}</lastmod>
     <changefreq>${r.changefreq}</changefreq>
     <priority>${r.priority}</priority>
-  </url>`).join('\n');
+  </url>`,
+    )
+    .join("\n");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -54,10 +41,10 @@ function generateSitemap() {
 ${urls}
 </urlset>`;
 
-  const outPath = resolve(__dirname, '..', 'public', 'sitemap.xml');
-  writeFileSync(outPath, xml, 'utf-8');
+  const outPath = resolve(__dirname, "..", "public", "sitemap.xml");
+  writeFileSync(outPath, xml, "utf-8");
   console.log(`✅ Sitemap generated → ${outPath}`);
-  console.log(`   ${routes.length + 1} URLs included.`);
+  console.log(`   ${uniqueRoutes.length + 1} URLs included.`);
 }
 
 generateSitemap();
